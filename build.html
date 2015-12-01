@@ -87,7 +87,7 @@ $(document).ready(function(){initNavTree('build.html','');});
 </ul>
 <p>Optional build components:</p><ul>
 <li>Bison and Flex to change expression parsing.</li>
-<li><a href="http://www.stack.nl/~dimitri/doxygen/">Doxygen</a> for generating API documentation.</li>
+<li><a href="http://www.stack.nl/~dimitri/doxygen/">Doxygen</a> for generating user and API documentation.</li>
 </ul>
 <p>Open <a class="el" href="classCurves.html" title="The data model for loaded plots and curves. ">Curves</a> supports building against existing Qwt shared libraries, or building Qwt from source. To use an existing Qwt library, that library must be built against the same version of Qt and must be locatable by CMake. A full discussion of how CMake find libraries is beyond the scope of this document. To build Qwt from source:</p><ol type="1">
 <li>Download and unpack the Qwt source.</li>
@@ -113,10 +113,12 @@ $(document).ready(function(){initNavTree('build.html','');});
 <li>The Qt bin directory is available on the path. This is the path to the qmake executable.</li>
 <li>Qwt libraries are locatable by CMake or the source code is available as described above.</li>
 </ul>
+<p>The most straightforward way to include Qwt is to download the Qwt source from the <a href="http://sourceforge.net/projects/qwt/files/">Qwt downloads page</a>. Unpack the Qwt source and place all source files in the Qwt source directory under the ocurves/qwt/src directory. Note: the qwt code is not intended to be checked in to the Open <a class="el" href="classCurves.html" title="The data model for loaded plots and curves. ">Curves</a> source repository and the .gitignore file is set up accordingly.</p>
 <p>Open the command shell and proceed with the following instructions.</p><ol type="1">
 <li>Navigate to the Open <a class="el" href="classCurves.html" title="The data model for loaded plots and curves. ">Curves</a> source directory.</li>
 <li>Create a "build" directory within the Open <a class="el" href="classCurves.html" title="The data model for loaded plots and curves. ">Curves</a> source directory.</li>
 <li>Change into the build directory.</li>
+<li>Run "cmake .." or "cmake .. -DCMAKE_BUILD_TYPE=Debug" to generate project files.</li>
 <li>Build and install<ul>
 <li>On Linux or MacOS:<ul>
 <li>run "make"</li>
