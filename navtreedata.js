@@ -3,6 +3,7 @@ var NAVTREE =
   [ "OpenCurves", "index.html", [
     [ "Open Curves Overview", "index.html", null ],
     [ "Building Open Curves", "build.html", null ],
+    [ "Downloads", "downloads.html", null ],
     [ "Glossary", "glossary.html", null ],
     [ "Open Curves License", "lic.html", null ],
     [ "Third Party Components", "thirdparty.html", null ],
@@ -40,7 +41,7 @@ var NAVTREEINDEX =
 "annotated.html",
 "classPlotFile.html#a42f3b54b868ba645736d823a304bbf7f",
 "classPlotViewToolbar.html",
-"functions_func_c.html"
+"functions_func_b.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
