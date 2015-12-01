@@ -1,0 +1,16 @@
+<connection>
+  <network address="127.0.0.1" port="14444" protocol="tcp">
+    <buffer/>
+    <!-- <time column="1" scale="1.0e-6"/> -->
+    <comms binary="no">
+      <onconnect>hi</onconnect>
+      <headings>
+        <heading name="time"/>
+        <heading name="A"/>
+        <heading name="B"/>
+        <heading name="C"/>
+        <heading name="D"/>
+      </headings>
+    </comms>
+  </network>
+</connection>

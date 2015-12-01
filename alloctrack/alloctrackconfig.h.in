@@ -1,0 +1,39 @@
+//
+// author Kazys Stepanas
+//
+// Copyright (c) 2012 CSIRO
+//
+#ifndef __ALLOCTRACKCONFIG_
+#define __ALLOCTRACKCONFIG_
+
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+
+#cmakedefine ALLOCTRACK_SHARED
+
+#ifdef ALLOCTRACK_SHARED
+# ifdef _MSC_VER
+#  ifdef alloctrack_EXPORTS
+#   define ALLOCTRACKAPI __declspec(dllexport)
+#  else  // alloctrack_EXPORTS
+#   define ALLOCTRACKAPI __declspec(dllimport)
+#  endif // allocktrack_EXPORTS
+# endif // !_MSC_VER
+#endif // ALLOCTRACK_SHARED
+
+#ifndef ALLOCTRACKAPI
+#define ALLOCTRACKAPI
+#endif // ALLOCTRACKAPI
+
+#ifndef NDEBUG
+#define ALLOCTRACK_ALLOCATIONS 1
+#endif // !NDEBUG
+
+//#ifdef _MSC_VER
+///// Track file/line numbers by default for MS compilers. See module
+///// documentation.
+//#define ALLOCTRACK_LINES 1
+//#endif // _MSC_VER
+
+#endif // !DOXYGEN_SHOULD_SKIP_THIS
+
+#endif // __ALLOCTRACKCONFIG_

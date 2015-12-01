@@ -1,0 +1,12 @@
+Version 0.9 Build 63
+- Initial public release
+- Main features:
+  - Open and plot delimited time series data files
+  - Drag and drop data files.
+  - Split views
+  - Pan and zoom with synchronisation.
+  - Bookmarks to save/restore UI state.
+  - Real-time data connections (alpha/experimental)
+- Primary platform: Windows
+- Secondary platform: Mac OSX
+- Limited support: Linux

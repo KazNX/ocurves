@@ -1,0 +1,7 @@
+build*/
+cmake/docs/
+.project
+qwt/*
+!qwt/CMakeLists.txt
+qwt/src/*
+!qwt/src/CMakeLists.txt

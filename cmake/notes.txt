@@ -1,0 +1,7 @@
+Generating Documentation
+Doxygen style documentation can be generated for the CMake scripts using "cmake2doxyc.py". This requires python 3+ and doxygen. To generate run:
+  python cmake2doxyc.py -o docs -g cmakedoxyfile *.cmake
+Documentation will be generated in docs/html
+
+TODO:
+- Pair down to only debug or release Qt plugins on install.

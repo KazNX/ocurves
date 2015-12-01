@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/ocurves.png</file>
+        <file>icons/clear.png</file>
+        <file>icons/connect.png</file>
+        <file>icons/lock.png</file>
+        <file>icons/open.png</file>
+        <file>icons/reload.png</file>
+        <file>icons/unlock.png</file>
+        <file>icons/move.png</file>
+        <file>icons/multi-tool.png</file>
+        <file>icons/rubber-band.png</file>
+    </qresource>
+</RCC>

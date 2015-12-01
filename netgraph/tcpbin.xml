@@ -1,0 +1,19 @@
+<connection>
+  <network address="127.0.0.1" port="14444" protocol="tcp">
+    <buffer/>
+    <!-- <time field="timestamp" scale="1.0e-6"/> -->
+    <comms binary="true">
+      <receive>
+        <!-- Expected incoming data structure -->
+        <!-- Only fields with 'heading'='yes' are displayed. Additionally, the time element above may specify any field to derive a time value from. -->
+        <struct endian="network">
+          <field type="uint64" name="time" />
+          <field type="double" name="A" heading="true"/>
+          <field type="double" name="B" heading="true" />
+          <field type="double" name="C" heading="true" />
+          <field type="double" name="D" heading="true" />
+        </struct>
+      </receive>
+    </comms>
+  </network>
+</connection>

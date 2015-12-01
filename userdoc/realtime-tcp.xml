@@ -1,0 +1,142 @@
+<!--
+  TCP binary example.
+-->
+<connection>
+  <network address="127.0.0.1" port="14444" protocol="tcp">
+    <!-- Optional. See first example -->
+    <buffer size="10000" />
+    <!--
+      Optional time column specification.
+
+      For binary data, we can identify the time value by field name instead
+      of column number. Column number may still be used.
+    -->
+    <time field="timestamp" scale="1.0e-6"/>
+    <comms binary="true">
+      <!-- Optional connection message (binary) -->
+      <onconnect>
+        <!--
+          A binary structure definition for sending. Must provide values for
+          each field.
+
+          The 'endian' attribute may be 'big', 'little' or 'network' (big).
+          The default is 'network' for network byte order.
+        -->
+        <struct endian="network">
+          <!--
+            The definition of a field. Each field can have the following:
+            attributes
+            - type : required. See below.
+            - name : required. Names the field.
+            - heading : optional. 'true' if the field is to be displayed.
+
+            Fields are not displayed by default (heading is false) and
+            must have 'heading="true"' to be displayed. The time field
+            does not need to be displayed to be used.
+
+            Valid types are:
+            - int8, int16, int32, int64
+            - uint8, uint16, uint32, uint64
+            - float, double (32-bit and 64-bit respectively)
+
+            float and double should have Endian changes applied as for an
+            integer of the same bit width.
+
+            There are additionally three special field types used for padding:
+            - pad, padto, padtofield
+
+            The pad and padto types require an unsigned integer value, while
+            padtofield has a string value which matches a preceding field name.
+            They behave as follows:
+            - pad : value specifies the number of bytes to skip.
+            - padto : value indicates where in the stream to skip ahead to.
+            - padbyfield : like pad, but the number of padding bytes is read from
+                a preceding field.
+            - padtofield : like padto, but the number of padding bytes to skip to
+                is read from a preceding field.
+
+            The padto functionality only works if the value is greater than the
+            current stream position (from the structure start). For example,
+            consider a structure with:
+            - uint32 A 
+            - uint16 B
+            - padto 8
+
+            Without 'padto' the size would be 6 bytes. 'padto' extends it to 8
+            bytes. 'padto' would do nothing if it were 6 or less.
+
+            The 'padtofield' and 'padbyfield' types only work if the named field
+            appears earlier in the structure. Otherwise no padding value is available.
+            They are intended for use with size fields. For example:
+            padbyfield example:
+            - uint32 messageType
+            - uint16 payloadSize
+            - padbyfield "payloadSize"
+            - uint16 crc
+            Here padbyfield reads payload size and skips that many bytes.
+
+            padtpfield example:
+            - uint32 messageType
+            - uint16 messageSize
+            - padtofield "messageSize"
+            Here 'messsageSize' is read and the stream position moved to this
+            absolute byte position.
+
+            The structure may have any number of fields within reason.
+          -->
+          <field type="uint32" name="messageType">42</field>
+          <field type="uint16" name="messageSubtype">1</field>
+          <field type="pad" name="">2</field>
+        </struct>
+      </onconnect>
+      <!-- Define the incoming data structure -->
+      <receive>
+        <!-- Only fields with 'heading'='yes' are displayed. -->
+        <struct endian="network">
+          <field type="uint16" name="messageSize" />
+          <field type="uint64" name="time" />
+          <field type="double" name="A" heading="true"/>
+          <field type="double" name="B" heading="true" />
+          <field type="double" name="C" heading="true" />
+          <field type="double" name="D" heading="true" />
+          <field type="padtofield" name="">messageSize</field>
+        </struct>
+      </receive>
+      <!-- Message to send on disconnect if possible -->
+      <ondisconnect>
+        <struct>
+          <field type="uint32" name="messageType">42</field>
+          <field type="uint16" name="messageSubtype">0</field>
+          <field type="pad" name="">2</field>
+        </struct>
+      </ondisconnect>
+    </comms>
+  </network>
+</connection>
+
+<!--
+  UDP short binary example.
+-->
+<connection>
+  <network address="127.0.0.1" port="14444" protocol="udp">
+    <comms binary="true">
+      <onconnect>
+        <struct>
+          <field type="uint32" name="messageType">42</field>
+          <field type="uint16" name="messageSubtype">1</field>
+          <field type="pad" name="">2</field>
+        </struct>
+      </onconnect>
+      <receive>
+        <struct endian="network">
+          <field type="uint16" name="messageSize" />
+          <field type="uint64" name="time" />
+          <field type="double" name="A" heading="true"/>
+          <field type="double" name="B" heading="true" />
+          <field type="double" name="C" heading="true" />
+          <field type="double" name="D" heading="true" />
+          <field type="padtofield" name="">messageSize</field>
+        </struct>
+      </receive>
+  </network>
+</connection>

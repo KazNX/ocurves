@@ -1,0 +1,26 @@
+<!--
+  UDP short binary example.
+-->
+<connection>
+  <network address="127.0.0.1" port="14444" protocol="udp">
+    <comms binary="true">
+      <onconnect>
+        <struct>
+          <field type="uint32" name="messageType">42</field>
+          <field type="uint16" name="messageSubtype">1</field>
+          <field type="pad" name="">2</field>
+        </struct>
+      </onconnect>
+      <receive>
+        <struct endian="network">
+          <field type="uint16" name="messageSize" />
+          <field type="uint64" name="time" />
+          <field type="double" name="A" heading="true"/>
+          <field type="double" name="B" heading="true" />
+          <field type="double" name="C" heading="true" />
+          <field type="double" name="D" heading="true" />
+          <field type="padtofield" name="">messageSize</field>
+        </struct>
+      </receive>
+  </network>
+</connection>

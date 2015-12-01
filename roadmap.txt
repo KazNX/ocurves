@@ -1,0 +1,29 @@
+Version 1.0
+- Fix expression regeneration on restoring bookmarks: keep existing expressions.
+- Right click plot curve in plot view to show properties.
+- Resolve Linux installation and standardise installation paths.
+
+Version 1.x
+- Application settings and options dialog.
+- Quick pass low sample rate load, followed by higher resolution pass.
+  - Also support sub-sampling by averaging intervening values, instead of discrete samples.
+- Add option to use the system locale in parsing numbers. This may change the digit grouping and decimal characters.
+
+Version 2
+- Plugin system
+  - All current data sources and views are converted into plugins.
+  - Plugin system supporting user shared libraries and extension.
+  - Proposed, core plugin list:
+    - Curves class - plot/source collection.
+    - Plot view and split window system.
+    - Source and plot lists.
+    - Shared legend?
+    - Expressions.
+    - Expressions view.
+    - Bookmarks.
+    - File, expression and real-time plot generators.
+    - Toolbar collection.
+- Binary data cache. Caches curves into a binary format for faster reloading.
+
+Version 2.x+
+- 3D plot view: select three curves, one for each axis and plot.

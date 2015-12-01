@@ -1,0 +1,17 @@
+include(doxygen)
+include(installutil)
+include(marshal)
+include(targets)
+include(utility)
+
+if(WIN32)
+  include(setupwin)
+elseif(APPLE)
+  if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    include(setuposx)
+  else(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    include(setupios)
+  endif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+endif()
+
+include(setupgenos)

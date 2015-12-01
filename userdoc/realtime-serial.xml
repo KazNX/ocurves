@@ -1,0 +1,44 @@
+<!--
+  Serial port, text mode example.
+
+  For a binary serial port, replace the 'comms' section with that of the
+  binary example.
+-->
+<connection>
+  <!-- Specify a serial connection, its port and the BAUD rate -->
+  <serial port="COM3" baud="9600">
+    <!--
+      Optional: specify the size of the history buffer in elements. This
+      controls the plot window. May be omitted, or zero to use the default.
+    -->
+    <buffer size="10000" />
+    <!--
+      Optional: Index of the timestamp column. Used to time stamp each plot
+      value. The index is specified by the 'column' attribute and is a
+      one based index (default zero, for no column). The 'scale' attribute
+      is used to scale the read time stamps into seconds. The default is 1.
+    -->
+    <time column="1" scale="1.0e-3"/>
+    <!-- Specify the  mode and messages. The default mode is text -->
+    <comms binary="false">
+      <!-- Optional: text message to send on connect. Send once. -->
+      <onconnect>Hello world</onconnect>
+      <!--
+        Optional headings specification for the incoming data. This sets the
+        expected number of samples per line and names them.
+
+        When omitted, the number of samples per line is inferred from the first
+        line, and headings labeled "Column 1", "Column 2", ...
+      -->
+      <headings>
+        <heading name="timestamp" />
+        <heading name="A" />
+        <heading name="B" />
+        <heading name="C" />
+        <heading name="D" />
+      </headings>
+      <!-- Optional: text message to send on disconnect if possible. Send once. -->
+      <ondisconnect>Goodbye cruel world</ondisconnect>
+    </comms>
+  </serial>
+</connection>
