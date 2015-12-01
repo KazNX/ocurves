@@ -1,0 +1,57 @@
+var group__data =
+[
+    [ "bookmarks", "namespacebookmarks.html", null ],
+    [ "Curves", "classCurves.html", [
+      [ "Curves", "classCurves.html#a167fb43015c000bc17f1886f4c0e5331", null ],
+      [ "~Curves", "classCurves.html#a6d28669a9414c7709a1b12a612bf7ce8", null ],
+      [ "clearCurves", "classCurves.html#a1d7f8f533423f738f7bfbf8ed7889763", null ],
+      [ "completeLoading", "classCurves.html#a9958e5e540d35260e2ddbe090f805186", null ],
+      [ "curveAdded", "classCurves.html#aed59d3a65d4ef15804d8b730554e5516", null ],
+      [ "curveComplete", "classCurves.html#ac4011452eb83d121317418fcdc257d8e", null ],
+      [ "curveDataChanged", "classCurves.html#a06c77a3c4d88376563f13649f82906bd", null ],
+      [ "curvePropertiesMap", "classCurves.html#add45ce177923e984a0eb9d2658db8d3b", null ],
+      [ "curveRemoved", "classCurves.html#aa53beec81d6912d44e7c7aeb5ffe0c79", null ],
+      [ "curves", "classCurves.html#a60f870929dc04e4030627eeae1f132af", null ],
+      [ "curvesCleared", "classCurves.html#a8ec9a701ae03f8b96e114349f3704821", null ],
+      [ "enumerateFileSources", "classCurves.html#aa5dfd2db2541d36602d621d40206ecb9", null ],
+      [ "enumerateSources", "classCurves.html#ac5dfe397234bb9db4c406c823f5d06ee", null ],
+      [ "invalidate", "classCurves.html#adb44d7d1b49d413a5780a5a77970443d", null ],
+      [ "invalidate", "classCurves.html#a2df70b6eab09864a41cdfb20fcc08c3b", null ],
+      [ "isLoading", "classCurves.html#a2cd25c356d6a728ad1239eaf69a162a5", null ],
+      [ "loadingComplete", "classCurves.html#a205f3c19cbbeb54b8133d0a1084e45e1", null ],
+      [ "loadingCurves", "classCurves.html#ae5ee7fc0cc03f7963e42964eea80aa76", null ],
+      [ "migrateLoadingData", "classCurves.html#a2d24dd41ca7c39ea214eea19b84fdbd6", null ],
+      [ "newCurve", "classCurves.html#a800270eedeea8b720bf5ff1f4f3df654", null ],
+      [ "realTimeCurves", "classCurves.html#aef70f4b1049b2bb153f3e010c43a870b", null ],
+      [ "removeCurve", "classCurves.html#a54b0f4dd57f7c0b93c7756f16836f466", null ],
+      [ "removeUsingExpression", "classCurves.html#a6203832e554b488e83a1c105e8bfa401", null ],
+      [ "setCurvePropertiesMap", "classCurves.html#a256e5b1853056d47ae0d48de350bab4e", null ],
+      [ "sourceDataChanged", "classCurves.html#abdc56faf090254b854993e099018fa30", null ]
+    ] ],
+    [ "CurveList", "classCurves_1_1CurveList.html", [
+      [ "const_iterator", "classCurves_1_1CurveList.html#abc458201728d65a7675fdd3966225add", null ],
+      [ "iterator", "classCurves_1_1CurveList.html#a1314f752fd61e127cc5e6c6d14bd09fd", null ],
+      [ "CurveList", "classCurves_1_1CurveList.html#a5ccd4dd2c86321f40107ede2e3092ec0", null ],
+      [ "~CurveList", "classCurves_1_1CurveList.html#a8123d9541fd5d74501528df04b21cf64", null ],
+      [ "begin", "classCurves_1_1CurveList.html#ad4c2bc60bf181c1aa7017bdf0354e17d", null ],
+      [ "end", "classCurves_1_1CurveList.html#a2df215b9a6559defad5d859ad2b400f0", null ],
+      [ "list", "classCurves_1_1CurveList.html#ae5709ca677d077e3765d0e59f03b58bb", null ],
+      [ "release", "classCurves_1_1CurveList.html#ac441fbb67215d2a71d336747304d1c92", null ]
+    ] ],
+    [ "Expressions", "classExpressions.html", [
+      [ "Expressions", "classExpressions.html#ac7b985f5627a004dc2a1c823e93f88b1", null ],
+      [ "~Expressions", "classExpressions.html#ad7d13bd9f1d99d825cb9392899a562db", null ],
+      [ "addExpression", "classExpressions.html#a423229c150a99cb0681cb46c87366e12", null ],
+      [ "clear", "classExpressions.html#a1556dd62317ee2660179dfe043e9f47f", null ],
+      [ "contains", "classExpressions.html#aeba6a2d7284e23930dbeef5b3e3b3377", null ],
+      [ "expressionAdded", "classExpressions.html#a1640ab078ce51fe7ec71f09131b21d51", null ],
+      [ "expressionRemoved", "classExpressions.html#a86b4e696f401785e0593f4c6d8c73352", null ],
+      [ "expressions", "classExpressions.html#a09251ca2f69ba2e2263f6331ea80c9b1", null ],
+      [ "functionRegister", "classExpressions.html#a0eb4cb417fbabd6ec190fdee006d67a6", null ],
+      [ "functionRegistered", "classExpressions.html#a67f9e14adfd549bd14f0e94b1ad13967", null ],
+      [ "loadExpressions", "classExpressions.html#af39b4788b35d9269af6e63f93ad9f10a", null ],
+      [ "registerFunction", "classExpressions.html#a50238a4326baec045eda7c8d3d8b0046", null ],
+      [ "removeExpression", "classExpressions.html#a6dc03eeb368c03b1ea470f79e4a9645f", null ],
+      [ "saveExpressions", "classExpressions.html#a18a4ced98c02dc207e45c855bb8d317b", null ]
+    ] ]
+];

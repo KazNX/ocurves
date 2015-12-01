@@ -1,0 +1,28 @@
+var classCurves =
+[
+    [ "Curves", "classCurves.html#a167fb43015c000bc17f1886f4c0e5331", null ],
+    [ "~Curves", "classCurves.html#a6d28669a9414c7709a1b12a612bf7ce8", null ],
+    [ "clearCurves", "classCurves.html#a1d7f8f533423f738f7bfbf8ed7889763", null ],
+    [ "completeLoading", "classCurves.html#a9958e5e540d35260e2ddbe090f805186", null ],
+    [ "curveAdded", "classCurves.html#aed59d3a65d4ef15804d8b730554e5516", null ],
+    [ "curveComplete", "classCurves.html#ac4011452eb83d121317418fcdc257d8e", null ],
+    [ "curveDataChanged", "classCurves.html#a06c77a3c4d88376563f13649f82906bd", null ],
+    [ "curvePropertiesMap", "classCurves.html#add45ce177923e984a0eb9d2658db8d3b", null ],
+    [ "curveRemoved", "classCurves.html#aa53beec81d6912d44e7c7aeb5ffe0c79", null ],
+    [ "curves", "classCurves.html#a60f870929dc04e4030627eeae1f132af", null ],
+    [ "curvesCleared", "classCurves.html#a8ec9a701ae03f8b96e114349f3704821", null ],
+    [ "enumerateFileSources", "classCurves.html#aa5dfd2db2541d36602d621d40206ecb9", null ],
+    [ "enumerateSources", "classCurves.html#ac5dfe397234bb9db4c406c823f5d06ee", null ],
+    [ "invalidate", "classCurves.html#adb44d7d1b49d413a5780a5a77970443d", null ],
+    [ "invalidate", "classCurves.html#a2df70b6eab09864a41cdfb20fcc08c3b", null ],
+    [ "isLoading", "classCurves.html#a2cd25c356d6a728ad1239eaf69a162a5", null ],
+    [ "loadingComplete", "classCurves.html#a205f3c19cbbeb54b8133d0a1084e45e1", null ],
+    [ "loadingCurves", "classCurves.html#ae5ee7fc0cc03f7963e42964eea80aa76", null ],
+    [ "migrateLoadingData", "classCurves.html#a2d24dd41ca7c39ea214eea19b84fdbd6", null ],
+    [ "newCurve", "classCurves.html#a800270eedeea8b720bf5ff1f4f3df654", null ],
+    [ "realTimeCurves", "classCurves.html#aef70f4b1049b2bb153f3e010c43a870b", null ],
+    [ "removeCurve", "classCurves.html#a54b0f4dd57f7c0b93c7756f16836f466", null ],
+    [ "removeUsingExpression", "classCurves.html#a6203832e554b488e83a1c105e8bfa401", null ],
+    [ "setCurvePropertiesMap", "classCurves.html#a256e5b1853056d47ae0d48de350bab4e", null ],
+    [ "sourceDataChanged", "classCurves.html#abdc56faf090254b854993e099018fa30", null ]
+];
