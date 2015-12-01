@@ -18,6 +18,8 @@
 ///
 /// Build instructions are available @ref build "here".
 ///
+/// Download the latest build for Windows @ref downloads "here".
+///
 /// Open Curves uses several third-party components, acknowledged @ref thirdparty "here".
 
 /// @page thirdparty Third Party Components
