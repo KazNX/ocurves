@@ -36,7 +36,7 @@ Building Open Curves requires the following tools:
 
 Optional build components:
 - Bison and Flex to change expression parsing.
-- <a href="http://www.stack.nl/~dimitri/doxygen/">Doxygen</a> for generating API documentation.
+- <a href="http://www.stack.nl/~dimitri/doxygen/">Doxygen</a> for generating user and API documentation.
 
 Open Curves supports building against existing Qwt shared libraries, or building Qwt from source.
 To use an existing Qwt library, that library must be built against the same version of Qt and
@@ -71,10 +71,17 @@ Before running it is advised that:
 - The Qt bin directory is available on the path. This is the path to the qmake executable.
 - Qwt libraries are locatable by CMake or the source code is available as described above.
 
+The most straightforward way to include Qwt is to download the Qwt source from the
+<a href="http://sourceforge.net/projects/qwt/files/">Qwt downloads page</a>. Unpack the
+Qwt source and place all source files in the Qwt source directory under the ocurves/qwt/src
+directory. Note: the qwt code is not intended to be checked in to the Open Curves source
+repository and the .gitignore file is set up accordingly.
+
 Open the command shell and proceed with the following instructions.
 -# Navigate to the Open Curves source directory.
 -# Create a "build" directory within the Open Curves source directory.
 -# Change into the build directory.
+-# Run "cmake .." or "cmake .. -DCMAKE_BUILD_TYPE=Debug" to generate project files.
 -# Build and install
   - On Linux or MacOS:
     - run "make"
