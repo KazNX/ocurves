@@ -6,7 +6,9 @@
 
 This page lists the available download packages.
 
-The latest version for Windows 64-bit can be found here: <a href="./downloads/OpenCurves-0.9.0-win64.msi">OpenCurves-0.9.0-win64</a>.
+The latest packages versions are listed below:
+- Windows 64-bit: <a href="./downloads/OpenCurves-0.9.0-win64.msi">OpenCurves-0.9.0-win64</a>
+- Mac OSX: <a href="./downloads/OCurves-0.9.0.app.zip">OCurves-0.9.0.app</a>.
 
 */
 
