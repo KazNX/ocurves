@@ -3,8 +3,16 @@ find_package(Doxygen QUIET)
 
 set(DOXYGEN_PROJECT "User Documentation")
 file(GLOB HEADERS *.h *.css)
+# Merge the user documentation with the API documentation.
+add_doxygen_directories(PATH ${HEADERS}
+                          IMAGE_PATH "images" "images/screens" "../ocurves/icons"
+                          EXAMPLE_PATH "."
+                          PARENT_SCOPE)
+
 set(DOXYGEN_INPUT_LIST "${CMAKE_CURRENT_LIST_DIR}")
-set(DOXYGEN_IMAGE_PATH "${CMAKE_CURRENT_LIST_DIR}/images ${CMAKE_CURRENT_LIST_DIR}/../ocurves/icons")
+set(DOXYGEN_IMAGE_PATH
+  "${CMAKE_CURRENT_LIST_DIR}/images \\\n${CMAKE_CURRENT_LIST_DIR}/images/screens \\\n${CMAKE_CURRENT_LIST_DIR}/../ocurves/icons"
+  )
 set(DOXYGEN_EXAMPLE_PATH "${CMAKE_CURRENT_LIST_DIR}")
 set(DOXYGEN_CSS "${CMAKE_CURRENT_LIST_DIR}/doc.css")
 set(DOXYGEN_HTML_OUTPUT "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/userdoc")

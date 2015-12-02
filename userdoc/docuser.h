@@ -10,19 +10,44 @@
 // - User documentation page labels are prefixed with a 'u' to help distinguish from API and technical reference documentation.
 
 /*!
+@cond USERDOC
 @mainpage User Documentation
 Open Curves is a time series data plotting application designed to quickly open and view CSV style data
 files containing numeric, time series data. Open Curves aims to make plotting such data quick and easy
 without providing data manipulation present in packages such as MATLAB.
 
-# Getting Started #
+- @subpage uistart
+- @subpage uui
+- @subpage uformats
+- @subpage urtsources
+- @subpage uexp
+- @subpage ubookmarks
+@endcond
+*/
+
+/*!
+@cond !USERDOC
+@page udoc User Documentation
+This section contains the user documentation for Open Curves. This documentation is also available though
+the "help" menu option in the Open Curves application.
+
+- @subpage uistart
+- @subpage uui
+- @subpage uformats
+- @subpage urtsources
+- @subpage uexp
+- @subpage ubookmarks
+@endcond
+*/
+
+/*!
+@page uistart Getting Started
 To plot a time series data file, open Open Curves and simply drag-and-drop the file from a file
 explorer program into the Open Curves window. Alternatively, select "File->Open" from the Open Curves menu
 bar and browse to the data file of interest.
 
 For more information on supported data file formats, see @ref uformats. For information about using
 the Open Curves UI, see @ref uui.
-
 */
 
 /*!
@@ -317,9 +342,8 @@ redrawn as new data arrive and are added to the ring buffer.
 
 Expressions are not supported with real time data.
 
-@subpage urtformat
-@subpage urtex
-
+- @subpage urtformat
+- @subpage urtex
 */
 
 /*!
@@ -421,7 +445,7 @@ number of @c heading child elements, one per "column" as defined in the
 used as the name for that column.
 
 When omitted, the number of text based samples per line is inferred from the first line, and
-headings are labeled "Column 1", "Column 2", ...
+headings are labelled "Column 1", "Column 2", ...
 
 The @c receive element defines a binary structure to read and has exactly one @c struct child.
 
