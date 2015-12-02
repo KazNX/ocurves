@@ -2,6 +2,8 @@ var NAVTREE =
 [
   [ "OpenCurves", "index.html", [
     [ "Open Curves Overview", "index.html", null ],
+    [ "Screen Shots", "uiscreens.html", null ],
+    [ "User Documentation", "udoc.html", "udoc" ],
     [ "Building Open Curves", "build.html", null ],
     [ "Downloads", "downloads.html", null ],
     [ "Glossary", "glossary.html", null ],
