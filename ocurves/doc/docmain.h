@@ -21,6 +21,9 @@
 /// Download the latest build for Windows @ref downloads "here".
 ///
 /// Open Curves uses several third-party components, acknowledged @ref thirdparty "here".
+///
+/// @image html ui-example-small.png
+
 
 /// @page thirdparty Third Party Components
 /// Open Curves uses the following third party components and libraries:
