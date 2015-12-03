@@ -55,7 +55,7 @@ endif(ALLOCTRACK_ENABLE)
 set(DOXYGEN_EXAMPLE_PATH "${CMAKE_CURRENT_LIST_DIR}")
 generate_doxygen_target(ocurves-html PROJECT "Open Curves" VERSION 0.9)
 
-install(FILES README.md release-notes.txt DESTINATION "${OCURVES_SUPPORT_TARGET_DIR}" COMPONENT Runtime)
+install(FILES README.md license.txt release-notes.txt DESTINATION "${OCURVES_SUPPORT_TARGET_DIR}" COMPONENT Runtime)
 include(InstallRequiredSystemLibraries)
 install(FILES ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS} DESTINATION "${OCURVES_BINARY_TARGET_DIR}" COMPONENT Runtime)
 
