@@ -125,7 +125,11 @@ if(NOT DEFINED OCURVES_PLUGIN_TARGET_DIR)
   set(OCURVES_PLUGIN_TARGET_DIR plugins)
 endif(NOT DEFINED OCURVES_PLUGIN_TARGET_DIR)
 
-install_qt5_plugins(${OCURVES_PLUGIN_TARGET_DIR} platforms imageformats printsupport)
+set(QT_INSTALL_PLUGINS dir MinimalIntegration dir Jpeg)
+if(WIN32)
+  list(APPEND QT_INSTALL_PLUGINS WindowsPrinterSupport)
+endif(WIN32)
+install_qt5_plugins(${OCURVES_PLUGIN_TARGET_DIR} ${QT_INSTALL_PLUGINS})
 
 if(TARGET qwt)
 target_runtime_dir(QWT_LOC qwt)
