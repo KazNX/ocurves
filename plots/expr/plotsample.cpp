@@ -225,12 +225,11 @@ QString PlotSample::stringExpression() const
     return _boundName;
   }
 
-  stream << _curveId;
   if (_fileId)
   {
-    stream << '|';
-    stream << _fileId;
+    stream << _fileId << '|';
   }
+  stream << _curveId;
 
   return str;
 }
