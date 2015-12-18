@@ -4,6 +4,7 @@ var classPlotSlice =
     [ "~PlotSlice", "classPlotSlice.html#afc7db57f618617c7447a6ca9fceaa1de", null ],
     [ "bind", "classPlotSlice.html#aad1b2dd371e18cdd549254c2e2b4b0d6", null ],
     [ "clone", "classPlotSlice.html#a14b9bc17a77fff83aa6edb53a5c4d375", null ],
+    [ "explicitTime", "classPlotSlice.html#ad0cd6a86b966c3ba95b074199da89fa3", null ],
     [ "indexee", "classPlotSlice.html#ad7f8870a228f95e8c1661b559f168aa2", null ],
     [ "indexerEnd", "classPlotSlice.html#a67bb24ba6df56f72103ac74b4bd1f876", null ],
     [ "indexerStart", "classPlotSlice.html#ab4c6e5cad41d04354ab00ffc321b34e3", null ],

@@ -97,16 +97,20 @@ $(document).ready(function(){initNavTree('plotslice_8h_source.html','');});
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <a class="code" href="classPlotExpression.html">PlotExpression</a> *<a class="code" href="classPlotSlice.html#a14b9bc17a77fff83aa6edb53a5c4d375">clone</a>() <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  QString stringExpression() <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  <a class="code" href="classPlotExpression.html">PlotExpression</a> *_indexee;       </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  <a class="code" href="classPlotExpression.html">PlotExpression</a> *_indexerStart;  </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  <a class="code" href="classPlotExpression.html">PlotExpression</a> *_indexerEnd;    </div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;};</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="preprocessor">#endif // __PLOTSLICE_H_</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="classPlotSlice.html#ad0cd6a86b966c3ba95b074199da89fa3">  116</a></span>&#160;  <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classPlotSlice.html#ad0cd6a86b966c3ba95b074199da89fa3">explicitTime</a>()<span class="keyword"> const override  </span>{ <span class="keywordflow">return</span> <span class="keyword">true</span>; }</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  QString stringExpression() <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  <a class="code" href="classPlotExpression.html">PlotExpression</a> *_indexee;       </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  <a class="code" href="classPlotExpression.html">PlotExpression</a> *_indexerStart;  </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  <a class="code" href="classPlotExpression.html">PlotExpression</a> *_indexerEnd;    </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  <a class="code" href="structPlotExpressionBindDomain.html">PlotExpressionBindDomain</a> _sliceDomain;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;};</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="preprocessor">#endif // __PLOTSLICE_H_</span></div>
+<div class="ttc" id="classPlotSlice_html_ad0cd6a86b966c3ba95b074199da89fa3"><div class="ttname"><a href="classPlotSlice.html#ad0cd6a86b966c3ba95b074199da89fa3">PlotSlice::explicitTime</a></div><div class="ttdeci">bool explicitTime() const  override</div><div class="ttdoc">Is the generated expression sensitive to changes in the time domain? </div><div class="ttdef"><b>Definition:</b> plotslice.h:116</div></div>
 <div class="ttc" id="classPlotSlice_html_a67bb24ba6df56f72103ac74b4bd1f876"><div class="ttname"><a href="classPlotSlice.html#a67bb24ba6df56f72103ac74b4bd1f876">PlotSlice::indexerEnd</a></div><div class="ttdeci">const PlotExpression * indexerEnd() const </div><div class="ttdoc">Accessor for the index end expression. </div><div class="ttdef"><b>Definition:</b> plotslice.h:80</div></div>
 <div class="ttc" id="classPlotBindingTracker_html"><div class="ttname"><a href="classPlotBindingTracker.html">PlotBindingTracker</a></div><div class="ttdoc">Supports multiple bindings of the same expression to different curves. </div><div class="ttdef"><b>Definition:</b> plotbindingtracker.h:34</div></div>
 <div class="ttc" id="classPlotSlice_html_afc7db57f618617c7447a6ca9fceaa1de"><div class="ttname"><a href="classPlotSlice.html#afc7db57f618617c7447a6ca9fceaa1de">PlotSlice::~PlotSlice</a></div><div class="ttdeci">~PlotSlice()</div><div class="ttdoc">Destructor. </div></div>

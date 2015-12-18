@@ -23,11 +23,14 @@ var udoc =
     [ "Supported Formats", "uformats.html", null ],
     [ "Real Time Sources", "urtsources.html", "urtsources" ],
     [ "Expressions", "uexp.html", [
+      [ "Expression Domain", "uexp.html#xdomain", null ],
       [ "Plot References", "uexp.html#xplotreferences", null ],
+      [ "Functions", "uexp.html#xfunctions", null ],
       [ "Advanced Plot References", "uexp.html#xadvancedreferences", [
         [ "Indexing", "uexp.html#xindexing", null ],
         [ "Slicing", "uexp.html#xslicing", null ],
-        [ "File specific references", "uexp.html#xfilereferences", null ]
+        [ "File specific references", "uexp.html#xfilereferences", null ],
+        [ "Advanced Expression Domains", "uexp.html#xadvanceddomains", null ]
       ] ]
     ] ],
     [ "Bookmarks", "ubookmarks.html", null ]

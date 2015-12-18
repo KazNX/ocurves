@@ -8,7 +8,8 @@ var classPlotInstance =
       [ "RingBuffer", "classPlotInstance.html#ab1e594429dbb8773ac1774d5bd3eb6abad32646c7d8a15c5ececa9d0db28efc02", null ],
       [ "ExplicitColour", "classPlotInstance.html#ab1e594429dbb8773ac1774d5bd3eb6aba070b6626993c23ae80fb97f164c495bc", null ],
       [ "FilterNaN", "classPlotInstance.html#ab1e594429dbb8773ac1774d5bd3eb6aba8262a5660a5d296091f791672ead1af6", null ],
-      [ "FilterInf", "classPlotInstance.html#ab1e594429dbb8773ac1774d5bd3eb6abaf1be34665db86f3a4e0adde368c4b457", null ]
+      [ "FilterInf", "classPlotInstance.html#ab1e594429dbb8773ac1774d5bd3eb6abaf1be34665db86f3a4e0adde368c4b457", null ],
+      [ "ExplicitTime", "classPlotInstance.html#ab1e594429dbb8773ac1774d5bd3eb6abac7063b3e50a19e6e780b804b53c5eddd", null ]
     ] ],
     [ "PlotInstance", "classPlotInstance.html#a3b723ffad2848345c0b1309d22f40cac", null ],
     [ "PlotInstance", "classPlotInstance.html#a9be82bb6372f8972d3cdf36396dbfe4c", null ],
@@ -19,6 +20,7 @@ var classPlotInstance =
     [ "data", "classPlotInstance.html#a66b8c42d67929c541dc3e86040ef1c43", null ],
     [ "dataComplete", "classPlotInstance.html#ae15b103f9e455515127a59d265d6039a", null ],
     [ "explicitColour", "classPlotInstance.html#acc350367cd324f1849dda08b9f2e96e6", null ],
+    [ "explicitTime", "classPlotInstance.html#a894039d2ef987c828a2fc4ea48e95308", null ],
     [ "expression", "classPlotInstance.html#ad173e3ab0ba4a3097787be8514aa9785", null ],
     [ "filterInf", "classPlotInstance.html#adf92c4abed90e13a00c0d6b813cd78e9", null ],
     [ "filterNaN", "classPlotInstance.html#aee4c87f9ea0f7abbfbde860ef2bfd7f4", null ],
@@ -33,6 +35,7 @@ var classPlotInstance =
     [ "setColour", "classPlotInstance.html#a55b6dee05eda647f7a3c4d1a5db40c8c", null ],
     [ "setComplete", "classPlotInstance.html#a636644fe97e50f5b9050293797de6d3e", null ],
     [ "setDefaultProperties", "classPlotInstance.html#aec38557f2526c656cfdaebe5392cb9b8", null ],
+    [ "setExplicitTime", "classPlotInstance.html#a75bde6a14c81c64bd46e6cae4bf02448", null ],
     [ "setExpression", "classPlotInstance.html#af4ca5e2d3600e9cb3f37c025fd6db6aa", null ],
     [ "setFilterInf", "classPlotInstance.html#a6e6649b5cb292fbfd1f4a72dfaa82d50", null ],
     [ "setFilterNaN", "classPlotInstance.html#a30f05f0ca0a99287ef115ca5d2c82765", null ],

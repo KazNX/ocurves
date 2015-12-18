@@ -129,6 +129,9 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr class="memitem:a05dae13d0bf1f07b44293add88df89b6"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlotExpression.html#a05dae13d0bf1f07b44293add88df89b6">toString</a> () const </td></tr>
 <tr class="memdesc:a05dae13d0bf1f07b44293add88df89b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the <code><a class="el" href="classPlotExpression.html" title="A PlotExpression represents an operation in a plot equation. ">PlotExpression</a></code> into a parseable string form.  <a href="#a05dae13d0bf1f07b44293add88df89b6">More...</a><br /></td></tr>
 <tr class="separator:a05dae13d0bf1f07b44293add88df89b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a056c3a3f9f913f075d82a9c270b8e830"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlotExpression.html#a056c3a3f9f913f075d82a9c270b8e830">explicitTime</a> () const </td></tr>
+<tr class="memdesc:a056c3a3f9f913f075d82a9c270b8e830"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the curve generated with explicit time values?  <a href="#a056c3a3f9f913f075d82a9c270b8e830">More...</a><br /></td></tr>
+<tr class="separator:a056c3a3f9f913f075d82a9c270b8e830"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A <code><a class="el" href="classPlotExpression.html" title="A PlotExpression represents an operation in a plot equation. ">PlotExpression</a></code> represents an operation in a plot equation. </p>
@@ -266,6 +269,35 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <p>Implemented in <a class="el" href="classPlotSample.html#ad458aa384da76e2b64c0edfde2e75018">PlotSample</a>, <a class="el" href="classPlotBinaryOperatorT.html#a7ad4fbab0856c0bcdded3905423c802d">PlotBinaryOperatorT&lt; Operator &gt;</a>, <a class="el" href="classPlotBinaryOperatorT.html#a7ad4fbab0856c0bcdded3905423c802d">PlotBinaryOperatorT&lt; Power&lt; double &gt; &gt;</a>, <a class="el" href="classPlotBinaryOperatorT.html#a7ad4fbab0856c0bcdded3905423c802d">PlotBinaryOperatorT&lt; std::multiplies&lt; double &gt; &gt;</a>, <a class="el" href="classPlotBinaryOperatorT.html#a7ad4fbab0856c0bcdded3905423c802d">PlotBinaryOperatorT&lt; std::plus&lt; double &gt; &gt;</a>, <a class="el" href="classPlotBinaryOperatorT.html#a7ad4fbab0856c0bcdded3905423c802d">PlotBinaryOperatorT&lt; std::divides&lt; double &gt; &gt;</a>, <a class="el" href="classPlotBinaryOperatorT.html#a7ad4fbab0856c0bcdded3905423c802d">PlotBinaryOperatorT&lt; std::minus&lt; double &gt; &gt;</a>, <a class="el" href="classPlotSlice.html#a14b9bc17a77fff83aa6edb53a5c4d375">PlotSlice</a>, <a class="el" href="classPlotUnaryOperatorT.html#a5c32d9cda5795c9fad981869fd5aea92">PlotUnaryOperatorT&lt; Operator &gt;</a>, <a class="el" href="classPlotUnaryOperatorT.html#a5c32d9cda5795c9fad981869fd5aea92">PlotUnaryOperatorT&lt; std::negate&lt; double &gt; &gt;</a>, <a class="el" href="classPlotFunction.html#af3e18ecc351fa28f185fe4e6ffe205c9">PlotFunction</a>, <a class="el" href="classPlotConstant.html#ae121254d35fa907312ac06e7b66de689">PlotConstant</a>, <a class="el" href="classPlotIndexExpression.html#a0e54909b1ac3c06f650a574ae4f9e918">PlotIndexExpression</a>, and <a class="el" href="classPlotBracketExpression.html#a43a38a3fb9e15bf9878aa622a61a08b7">PlotBracketExpression</a>.</p>
 
 <p>Referenced by <a class="el" href="classPlotUnaryOperatorT.html#a5c32d9cda5795c9fad981869fd5aea92">PlotUnaryOperatorT&lt; std::negate&lt; double &gt; &gt;::clone()</a>, and <a class="el" href="classPlotBinaryOperatorT.html#a7ad4fbab0856c0bcdded3905423c802d">PlotBinaryOperatorT&lt; std::minus&lt; double &gt; &gt;::clone()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a056c3a3f9f913f075d82a9c270b8e830"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool PlotExpression::explicitTime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Is the curve generated with explicit time values? </p>
+<p>Some expressions, such as slicing, are dependent on explicit time values and may require regeneration if the time scale, time base or time column are changed. Such expressions should return true from this method. Tree expressions should return true if any child expression returns true.</p>
+<dl class="section return"><dt>Returns</dt><dd>True if the expression generates a curves with explicit time values. </dd></dl>
+
+<p>Reimplemented in <a class="el" href="classPlotSlice.html#ad0cd6a86b966c3ba95b074199da89fa3">PlotSlice</a>, <a class="el" href="classPlotBinaryOperator.html#abcfed9c023ffe00e4ec08415ed9757ff">PlotBinaryOperator</a>, and <a class="el" href="classPlotUnaryOperator.html#abe6da22206d3c19de8af658a1c9b7be3">PlotUnaryOperator</a>.</p>
 
 </div>
 </div>

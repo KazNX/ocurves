@@ -94,6 +94,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stru
 <tr class="memitem:a9f3ee74c78f9e1be984f50e7e8a77a5f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPlotExpressionBindDomain.html#a9f3ee74c78f9e1be984f50e7e8a77a5f">isUnbounded</a> () const </td></tr>
 <tr class="memdesc:a9f3ee74c78f9e1be984f50e7e8a77a5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the domain is unbounded.  <a href="#a9f3ee74c78f9e1be984f50e7e8a77a5f">More...</a><br /></td></tr>
 <tr class="separator:a9f3ee74c78f9e1be984f50e7e8a77a5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ce742eb5c9fc6e5651354623d290434"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPlotExpressionBindDomain.html#a1ce742eb5c9fc6e5651354623d290434">contains</a> (double sampleTime, bool closedMin=true, bool closedMax=true) const </td></tr>
+<tr class="memdesc:a1ce742eb5c9fc6e5651354623d290434"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if <code>sampleTime</code> lies within the domain.  <a href="#a1ce742eb5c9fc6e5651354623d290434">More...</a><br /></td></tr>
+<tr class="separator:a1ce742eb5c9fc6e5651354623d290434"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -142,6 +145,61 @@ An unbounded domain has the following characteristics:
 
 The test for an unbounded domain only examines the @c sampleCount and may yield
 false positives.  </pre> </div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a1ce742eb5c9fc6e5651354623d290434"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool PlotExpressionBindDomain::contains </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>sampleTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>closedMin</em> = <code>true</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>closedMax</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if <code>sampleTime</code> lies within the domain. </p>
+<p>Validation respects the <code>minSet</code> and <code>maxSet</code> values such that an unbounded curve contains any <code>sampleTime</code> value. The test may be made open or closed as determined by the <code>closedMin</code> and <code>closedMax</code> values. If <code>closedMin</code> is true then <code>sampleTime == domainMin</code> is considered to be part of the domain, otherwise it is not part of the domain. <code>closedMax</code> corresponds to <code>sampleMax</code> in the same way.</p>
+<p>The default behaviour is closed at both ends.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sampleTime</td><td>The time value to test within the domain. </td></tr>
+    <tr><td class="paramname">closedMin</td><td>Close the interval at the minimum value? </td></tr>
+    <tr><td class="paramname">closedMax</td><td>Close the interval at the maximum value? </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if <code>sampleTime</code> lies within the domain. </dd></dl>
+
+<p>References <a class="el" href="structPlotExpressionBindDomain.html#a8140a5718552afd35f9d319ad7e2b7a2">domainMax</a>, <a class="el" href="structPlotExpressionBindDomain.html#a61cb641706ddb2bc32001dac43a01b9d">domainMin</a>, <a class="el" href="structPlotExpressionBindDomain.html#a0ae3b181640932dc17b4f1cab771d486">maxSet</a>, and <a class="el" href="structPlotExpressionBindDomain.html#ac7f0897e9de0b21edc13cf16906434a9">minSet</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a9f3ee74c78f9e1be984f50e7e8a77a5f"></a>
 <div class="memitem">
 <div class="memproto">

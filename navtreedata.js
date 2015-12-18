@@ -41,9 +41,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"classPlotFile.html#a42f3b54b868ba645736d823a304bbf7f",
-"classPlotViewToolbar.html",
-"functions_func_b.html"
+"classPlotExpressionParser.html#a8ca4430af8b7ad8d4250da9af3063f35",
+"classPlotView.html#ac296a6d1cba960b8f0180e14c919ec6b",
+"classplotutil_1_1RefCountPtr.html#affbfc8a0345fa18b02d0376e7e8c6798"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -86,6 +86,13 @@ $(document).ready(function(){initNavTree('uexp.html','');});
 </li>
 </ul>
 <p>An expression plot will only be visible for files that contain columns matching all expression items.</p>
+<h1><a class="anchor" id="xdomain"></a>
+Expression Domain</h1>
+<p>The domain of an expression is calculated as the union of the domain of expressions parts. In effect, the expression domain is solely derived from the domains of the curves referenced by and bound to the expression. This is because only curves have a well defined domain.</p>
+<p>The domain of a curve is determined by the time value of the minimum and maximum time samples for that curve; <code>[tmin, tmax]</code>. This normally corresponds to the time for the first and last samples in the curve. The time is either the zero based index of the sample - <code>[0, N-1]</code> where <code>N</code> is the number of samples - or the corresponding entry in the time column - <code>[tmin, tmax]</code> (see <a class="el" href="uui.html#utimescale">Time and Scaling</a>).</p>
+<p>For example, consider the curve S={ 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 } and the time column T={ 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5 }. The domain of this curve, with time column enabled is [0.25, 2.5].</p>
+<p>By contrast, a constant has no fixed, independent domain, and can be evaluated for any time.</p>
+<p>Note that some expressions will define a strict time domain, while others may be modified by the time column, time base and time scale. <a class="el" href="uexp.html#xslicing">Slicing</a> expressions in particular must define a strict time domain and must be recalculated if the time column, base or scale for the referenced curve changes.</p>
 <h1><a class="anchor" id="xplotreferences"></a>
 Plot References</h1>
 <p>Plot references are matched by name, with optional single or double quotes surrounding the plot name. Quotes are only required if the plot name contains spaces (see <a class="el" href="uformats.html">Supported Formats</a>) or if the name includes quotes. Below are some examples:</p><ul>
@@ -99,6 +106,11 @@ Plot References</h1>
 <li>r"gravity.*"</li>
 </ul>
 <p>Literal or constant values support any valid numeric string. This includes negative numbers and scientific notation in the form '1.534e-3'.</p>
+<h1><a class="anchor" id="xfunctions"></a>
+Functions</h1>
+<p>Functions are special operations which may be used in an expression to perform special calculations. Functions accept a number of parameters and accept any valid expression to generate the arguments. Functions are evaluated for each value in the current time series.</p>
+<p>For example, the <code>max(x)</code> function returns the maximum value of <code>x</code> so far in the time series. Consider the curve <code>S={ -1, 0, 2, 5, 4, 6, 3, 1, 0 }</code>, then the expression <code>max('S')</code> yeilds <code>{ -1, 0, 2, 5, 5, 6, 6, 6, 6 }</code>.</p>
+<p>Some expressions, such as <code>maxof</code>(x...) accept a variable number of parameters and may be used to compare the results of other expressions. <code>maxof</code> returns the current maximum sample of any number of expressions. From the previous example, we use <code>S</code> and add a new set <code>U={ 5, 4, 2, 0, -1, 8, 6, 2, 2 }</code> and the expression <code>maxof(S, U, 3)</code>. The result is the maximum sample of <code>S</code> and <code>U</code> and the constant 3 at each sample time: <code>{ 5, 4, 3, 5, 4, 8, 6, 3, 3 }</code>.</p>
 <h1><a class="anchor" id="xadvancedreferences"></a>
 Advanced Plot References</h1>
 <p>Plot references also support the following advanced features:</p><ul>
@@ -114,10 +126,12 @@ Indexing</h2>
 Slicing</h2>
 <p>Slicing syntax may be used to display a smaller portion of the original plot. Slicing syntax is: </p><pre class="fragment">  plot_name[start:end]
 </pre><p>This draws the parts of 'plot_name' between the start and end times (inclusive). Specifying both start and end is optional allowing only a start or end to be specified. The other is assumed to be from first sample, or to the end sample respectively. Examples:</p><ul>
-<li>plot_name[40:100] : slice 'plot_name' from the 40th to the 100th sample.</li>
+<li>plot_name[40:100] : slice 'plot_name' from time 40 up to an including time 100.</li>
 <li>plot_name[100:] : slice 'plot_name' from sample time 100 to the end.</li>
 <li>plot_name[:100] : slice 'plot_name' from the first sample to sample time 100.</li>
 </ul>
+<p>Note that the <code>end</code> slice value is included in the sampling domain. This differs from common slicing notation used in languages such as Python. This is because the slice values represent times rather than indexes.</p>
+<p>Also note that a slice expression must be regenerated if the referenced curve changes it's time domain. This occurs when the time column, time base or time scale are changed (consult <a class="el" href="uui.html#utimescale">Time and Scaling</a> for more information).</p>
 <h2><a class="anchor" id="xfilereferences"></a>
 File specific references</h2>
 <p>A plot reference may specify matching only a specific plot file using the following syntax: </p><pre class="fragment">  plot_file|plot_name
@@ -132,7 +146,19 @@ File specific references</h2>
 <p>Using file specific references, it is possible to generate plots which compare results between different files. For example, consider the expression: </p><pre class="fragment">  file1|column1 - file2|column1
 </pre><p>This will plot the difference between column1 in file1 and file2. The file specification may optionally be quoted usign either single or double quotes. The abs() function can be used to plot only the magnitude of the result: </p><pre class="fragment">  abs(file1|column1 - file2|column1)
 </pre><p>File specific references also support regular expressions. It is possible to compare column1 between all loaded files using the expression: </p><pre class="fragment">  r'.*'|column1 - r'.*'|column1
-</pre><p><b>Note:</b> since regular expression matching is exhaustive, this will result in mirrored graphs, comparing file1 to file2 and file2 to file1. </p>
+</pre><p><b>Note:</b> since regular expression matching is exhaustive, this will result in mirrored graphs, comparing file1 to file2 and file2 to file1.</p>
+<h2><a class="anchor" id="xadvanceddomains"></a>
+Advanced Expression Domains</h2>
+<p>Advanced expressions may cause some issues with determining the expression domain. Normally, curves from the same file all have the same domain, thus the domain of any expression referencing multiple curves from the same file is the same as the domain of any expression referencing only one such curve. Advanced curve references may have a different domain. Slicing expressions narrow the domain of the original curve, while file specific references allow files with independent domains to be combined.</p>
+<p>This issue is resolved by setting the domain of any expression as the union of the domains of all parts of that expression. Consider the sequence <code>S={ -1, 0, 2, 5, 4, 6, 3, 1, 0 }</code> with time column <code>T={ 1, 2, 3, 4, 5, 6, 7, 9, 10 }</code> and the expression <code>S[:5] - S[7:]</code>. The domain of <code>S</code> is <code>[1, 10]</code>, but the domains of <code>S[:5]</code> and <code>S[7:]</code> are <code>[1, 4]</code> and <code>[7, 10]</code> respectively. Note that in practice this is a meaningless expression, however, the expression evaluation proceeds as follows:</p><ol type="1">
+<li>Calculate the expression domain as the union of the domains of <code>S[:5]</code> and <code>S[7:]</code><ul>
+<li>Expression domain = <code>[1, 10]</code></li>
+</ul>
+</li>
+<li>Walk the expression domain calculating samples for at each step</li>
+</ol>
+<p>The second step here results in both expressions <code>S[:5]</code> and <code>S[7:]</code> being sampled outside of their domains. This is resolved by simply returning a zero value for such out of range references.</p>
+<p>The resulting curve is: <code>S[:5] - S[7:] = { -1, 0, 2, 5, 0, 0, -3, -1, 0 }</code>. </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

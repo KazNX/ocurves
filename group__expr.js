@@ -52,6 +52,7 @@ var group__expr =
       [ "PlotBinaryOperator", "classPlotBinaryOperator.html#a1cd8faea235a96e3ae357823e3458714", null ],
       [ "~PlotBinaryOperator", "classPlotBinaryOperator.html#ace9bfc4c407035ee66197a1aeedb430e", null ],
       [ "bind", "classPlotBinaryOperator.html#a7c89a0443b3653a6347189f4d0b4b514", null ],
+      [ "explicitTime", "classPlotBinaryOperator.html#abcfed9c023ffe00e4ec08415ed9757ff", null ],
       [ "left", "classPlotBinaryOperator.html#a6e5c62792da5d1bd2b0ba020be9488c1", null ],
       [ "right", "classPlotBinaryOperator.html#a34919d449d5961a9a7cac516880bcf2a", null ],
       [ "setLeft", "classPlotBinaryOperator.html#a1500038cc9fe8c4ddf290b97223f05f8", null ],
@@ -119,6 +120,7 @@ var group__expr =
     ] ],
     [ "PlotExpressionBindDomain", "structPlotExpressionBindDomain.html", [
       [ "PlotExpressionBindDomain", "structPlotExpressionBindDomain.html#ad84cfafb050e6463d8ae55525ec8bdbd", null ],
+      [ "contains", "structPlotExpressionBindDomain.html#a1ce742eb5c9fc6e5651354623d290434", null ],
       [ "isUnbounded", "structPlotExpressionBindDomain.html#a9f3ee74c78f9e1be984f50e7e8a77a5f", null ],
       [ "setUnbounded", "structPlotExpressionBindDomain.html#a84c5f4458a55c21f95624467717dd1b7", null ],
       [ "domainMax", "structPlotExpressionBindDomain.html#a8140a5718552afd35f9d319ad7e2b7a2", null ],
@@ -204,6 +206,7 @@ var group__expr =
       [ "~PlotSlice", "classPlotSlice.html#afc7db57f618617c7447a6ca9fceaa1de", null ],
       [ "bind", "classPlotSlice.html#aad1b2dd371e18cdd549254c2e2b4b0d6", null ],
       [ "clone", "classPlotSlice.html#a14b9bc17a77fff83aa6edb53a5c4d375", null ],
+      [ "explicitTime", "classPlotSlice.html#ad0cd6a86b966c3ba95b074199da89fa3", null ],
       [ "indexee", "classPlotSlice.html#ad7f8870a228f95e8c1661b559f168aa2", null ],
       [ "indexerEnd", "classPlotSlice.html#a67bb24ba6df56f72103ac74b4bd1f876", null ],
       [ "indexerStart", "classPlotSlice.html#ab4c6e5cad41d04354ab00ffc321b34e3", null ],
@@ -214,6 +217,7 @@ var group__expr =
       [ "PlotUnaryOperator", "classPlotUnaryOperator.html#a1e7c5267740790700e4ef402348fd723", null ],
       [ "~PlotUnaryOperator", "classPlotUnaryOperator.html#ab87fb5ba8d9e379160795cca9717f04f", null ],
       [ "bind", "classPlotUnaryOperator.html#af160b10352b3ae73013f154307e18186", null ],
+      [ "explicitTime", "classPlotUnaryOperator.html#abe6da22206d3c19de8af658a1c9b7be3", null ],
       [ "operand", "classPlotUnaryOperator.html#a80a4c4ef42a0219b87afdf2d158a6e30", null ],
       [ "setOperand", "classPlotUnaryOperator.html#a74e466ceec93869d92ceb7b304531553", null ],
       [ "unbind", "classPlotUnaryOperator.html#a23630fc0f0114fc61c359c9713903a9c", null ]

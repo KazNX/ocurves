@@ -69,6 +69,7 @@ $(document).ready(function(){initNavTree('classPlotExpressionGenerator.html','')
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classPlotExpressionGenerator-members.html">List of all members</a>  </div>
@@ -91,18 +92,38 @@ Inheritance diagram for PlotExpressionGenerator:</div>
 </map>
  </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:ae0c80a7122665b06603402fb68e5aa46"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlotExpressionGenerator.html#ae0c80a7122665b06603402fb68e5aa46">AddExpressionResult</a> { <a class="el" href="classPlotExpressionGenerator.html#ae0c80a7122665b06603402fb68e5aa46a6b57918010af4e906e5a1632a5ef1ea9">AER_QueuedPartial</a> = -1, 
+<a class="el" href="classPlotExpressionGenerator.html#ae0c80a7122665b06603402fb68e5aa46a8e825546ca92e6a3d41dbbb994a03287">AER_AlreadyComplete</a>, 
+<a class="el" href="classPlotExpressionGenerator.html#ae0c80a7122665b06603402fb68e5aa46a00ffd2a22172ac2f8999ef264d24a7a3">AER_Queued</a>
+ }<tr class="memdesc:ae0c80a7122665b06603402fb68e5aa46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return value sfor <code><a class="el" href="classPlotExpressionGenerator.html#ae292bcc2dc841b995c15cbea7d394974" title="Adds an expression to be generated even if already running. ">addExpression()</a></code> and <code><a class="el" href="classPlotExpressionGenerator.html#ae9f32c0fa48f7b814a45c52f4b84fab1" title="Adds a set of expression to be generated even if already running. ">addExpressions()</a></code>.  <a href="classPlotExpressionGenerator.html#ae0c80a7122665b06603402fb68e5aa46">More...</a><br /></td></tr>
+<tr class="separator:ae0c80a7122665b06603402fb68e5aa46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</td></tr>
+<tr class="inherit_header pub_types_classPlotGenerator"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classPlotGenerator')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classPlotGenerator.html">PlotGenerator</a></td></tr>
+<tr class="memitem:ab8318e913bfd1f81d9c12eef1db476c0 inherit pub_types_classPlotGenerator"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlotGenerator.html#ab8318e913bfd1f81d9c12eef1db476c0">ControlFlag</a> { <b>None</b> = 0, 
+<a class="el" href="classPlotGenerator.html#ab8318e913bfd1f81d9c12eef1db476c0ad7c7e2890f05268b881c8e44b15d0432">RelativeTime</a> = (1 &lt;&lt; 0)
+ }<tr class="memdesc:ab8318e913bfd1f81d9c12eef1db476c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Plot generation control flags. Must be set before execution.  <a href="classPlotGenerator.html#ab8318e913bfd1f81d9c12eef1db476c0">More...</a><br /></td></tr>
+<tr class="separator:ab8318e913bfd1f81d9c12eef1db476c0 inherit pub_types_classPlotGenerator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a4e2691d83e8e80cb8ba5af9970ae3890"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlotExpressionGenerator.html#a4e2691d83e8e80cb8ba5af9970ae3890">PlotExpressionGenerator</a> (<a class="el" href="classCurves.html">Curves</a> *<a class="el" href="classPlotGenerator.html#a4f657f005059b47eb3277c2c666435dd">curves</a>, const QList&lt; <a class="el" href="classPlotExpression.html">PlotExpression</a> * &gt; &amp;expressions, const QStringList &amp;sourceNames)</td></tr>
 <tr class="memdesc:a4e2691d83e8e80cb8ba5af9970ae3890"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an expression generator based on the given expressions and curves.  <a href="#a4e2691d83e8e80cb8ba5af9970ae3890">More...</a><br /></td></tr>
 <tr class="separator:a4e2691d83e8e80cb8ba5af9970ae3890"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08bed6d068202bdd374b0ce18853d6d1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlotExpressionGenerator.html#a08bed6d068202bdd374b0ce18853d6d1">PlotExpressionGenerator</a> (<a class="el" href="classCurves.html">Curves</a> *<a class="el" href="classPlotGenerator.html#a4f657f005059b47eb3277c2c666435dd">curves</a>, const QList&lt; const <a class="el" href="classPlotExpression.html">PlotExpression</a> * &gt; &amp;expressions, const QStringList &amp;sourceNames)</td></tr>
+<tr class="separator:a08bed6d068202bdd374b0ce18853d6d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afbf108d54c766959aa99390b5a3494b8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afbf108d54c766959aa99390b5a3494b8"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlotExpressionGenerator.html#afbf108d54c766959aa99390b5a3494b8">~PlotExpressionGenerator</a> ()</td></tr>
 <tr class="memdesc:afbf108d54c766959aa99390b5a3494b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>
 <tr class="separator:afbf108d54c766959aa99390b5a3494b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a46caa9ff92428bc68a8d0deea4b652"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlotExpressionGenerator.html#a8a46caa9ff92428bc68a8d0deea4b652">addExpression</a> (<a class="el" href="classPlotExpression.html">PlotExpression</a> *expression)</td></tr>
-<tr class="memdesc:a8a46caa9ff92428bc68a8d0deea4b652"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an expression to be generated even if already running.  <a href="#a8a46caa9ff92428bc68a8d0deea4b652">More...</a><br /></td></tr>
-<tr class="separator:a8a46caa9ff92428bc68a8d0deea4b652"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae292bcc2dc841b995c15cbea7d394974"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlotExpressionGenerator.html#ae292bcc2dc841b995c15cbea7d394974">addExpression</a> (const <a class="el" href="classPlotExpression.html">PlotExpression</a> *expression)</td></tr>
+<tr class="memdesc:ae292bcc2dc841b995c15cbea7d394974"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an expression to be generated even if already running.  <a href="#ae292bcc2dc841b995c15cbea7d394974">More...</a><br /></td></tr>
+<tr class="separator:ae292bcc2dc841b995c15cbea7d394974"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9f32c0fa48f7b814a45c52f4b84fab1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlotExpressionGenerator.html#ae9f32c0fa48f7b814a45c52f4b84fab1">addExpressions</a> (const QList&lt; const <a class="el" href="classPlotExpression.html">PlotExpression</a> * &gt; &amp;expressions)</td></tr>
+<tr class="memdesc:ae9f32c0fa48f7b814a45c52f4b84fab1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a set of expression to be generated even if already running.  <a href="#ae9f32c0fa48f7b814a45c52f4b84fab1">More...</a><br /></td></tr>
+<tr class="separator:ae9f32c0fa48f7b814a45c52f4b84fab1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93db93351d6c87d7f572c6b686e71f6d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlotExpressionGenerator.html#a93db93351d6c87d7f572c6b686e71f6d">removeExpression</a> (const <a class="el" href="classPlotExpression.html">PlotExpression</a> *expression)</td></tr>
 <tr class="memdesc:a93db93351d6c87d7f572c6b686e71f6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aborts generation of <code>expression</code> if it has yet to be generated.  <a href="#a93db93351d6c87d7f572c6b686e71f6d">More...</a><br /></td></tr>
 <tr class="separator:a93db93351d6c87d7f572c6b686e71f6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -160,12 +181,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pub_types_classPlotGenerator"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classPlotGenerator')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classPlotGenerator.html">PlotGenerator</a></td></tr>
-<tr class="memitem:ab8318e913bfd1f81d9c12eef1db476c0 inherit pub_types_classPlotGenerator"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlotGenerator.html#ab8318e913bfd1f81d9c12eef1db476c0">ControlFlag</a> { <b>None</b> = 0, 
-<a class="el" href="classPlotGenerator.html#ab8318e913bfd1f81d9c12eef1db476c0ad7c7e2890f05268b881c8e44b15d0432">RelativeTime</a> = (1 &lt;&lt; 0)
- }<tr class="memdesc:ab8318e913bfd1f81d9c12eef1db476c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Plot generation control flags. Must be set before execution.  <a href="classPlotGenerator.html#ab8318e913bfd1f81d9c12eef1db476c0">More...</a><br /></td></tr>
-<tr class="separator:ab8318e913bfd1f81d9c12eef1db476c0 inherit pub_types_classPlotGenerator"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</td></tr>
 <tr class="inherit_header pub_slots_classPlotGenerator"><td colspan="2" onclick="javascript:toggleInherit('pub_slots_classPlotGenerator')"><img src="closed.png" alt="-"/>&#160;Public Slots inherited from <a class="el" href="classPlotGenerator.html">PlotGenerator</a></td></tr>
 <tr class="memitem:a297d62c68da202a15600799030f95ea4 inherit pub_slots_classPlotGenerator"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a297d62c68da202a15600799030f95ea4"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlotGenerator.html#a297d62c68da202a15600799030f95ea4">abortLoad</a> ()</td></tr>
@@ -228,7 +243,34 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <li>'samples-b'|'value' - 'samples-b'|'value'</li>
 </ul>
 <dl class="section note"><dt>Note</dt><dd>The <code><a class="el" href="classPlotSource.html" title="Provides details about a source from which PlotInstance objects have been generated. ">PlotSource</a></code> for <code><a class="el" href="classPlotInstance.html" title="Holds data for a single curve. ">PlotInstance</a></code> objects generated here is the same as the original source. Expression curves can be distinguished by the fact that <code><a class="el" href="classPlotInstance.html#ad173e3ab0ba4a3097787be8514aa9785" title="Get the expression which generated this plot (Expression source() only). ">PlotInstance::expression()</a></code> is not null. </dd></dl>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a class="anchor" id="ae0c80a7122665b06603402fb68e5aa46"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classPlotExpressionGenerator.html#ae0c80a7122665b06603402fb68e5aa46">PlotExpressionGenerator::AddExpressionResult</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return value sfor <code><a class="el" href="classPlotExpressionGenerator.html#ae292bcc2dc841b995c15cbea7d394974" title="Adds an expression to be generated even if already running. ">addExpression()</a></code> and <code><a class="el" href="classPlotExpressionGenerator.html#ae9f32c0fa48f7b814a45c52f4b84fab1" title="Adds a set of expression to be generated even if already running. ">addExpressions()</a></code>. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="ae0c80a7122665b06603402fb68e5aa46a6b57918010af4e906e5a1632a5ef1ea9"></a>AER_QueuedPartial&#160;</td><td class="fielddoc">
+<p>Returned when some of the new expressions are successfully queued, while others have already been generated. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="ae0c80a7122665b06603402fb68e5aa46a8e825546ca92e6a3d41dbbb994a03287"></a>AER_AlreadyComplete&#160;</td><td class="fielddoc">
+<p>Returned when all of the expression begin added have already been generated. </p>
+<p>This occurs either because the generator thread has completed or because the expressions already exist and have been processed (or are currently being processed). </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="ae0c80a7122665b06603402fb68e5aa46a00ffd2a22172ac2f8999ef264d24a7a3"></a>AER_Queued&#160;</td><td class="fielddoc">
+<p>Returned when all the new expressions are successfully queued and will be generated. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a4e2691d83e8e80cb8ba5af9970ae3890"></a>
 <div class="memitem">
 <div class="memproto">
@@ -272,15 +314,48 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a8a46caa9ff92428bc68a8d0deea4b652"></a>
+<a class="anchor" id="a08bed6d068202bdd374b0ce18853d6d1"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool PlotExpressionGenerator::addExpression </td>
+          <td class="memname">PlotExpressionGenerator::PlotExpressionGenerator </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classPlotExpression.html">PlotExpression</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="classCurves.html">Curves</a> *&#160;</td>
+          <td class="paramname"><em>curves</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QList&lt; const <a class="el" href="classPlotExpression.html">PlotExpression</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>expressions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QStringList &amp;&#160;</td>
+          <td class="paramname"><em>sourceNames</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ae292bcc2dc841b995c15cbea7d394974"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int PlotExpressionGenerator::addExpression </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classPlotExpression.html">PlotExpression</a> *&#160;</td>
           <td class="paramname"><em>expression</em></td><td>)</td>
           <td></td>
         </tr>
@@ -289,7 +364,27 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 <p>Adds an expression to be generated even if already running. </p>
 <p>Thread-safe.</p>
-<p>The caller retains ownership of <code>expression</code>. </p><dl class="section return"><dt>Returns</dt><dd>True if generation of <code>expression</code> has been queued for the current run. False if generation is not running or has completed. </dd></dl>
+<p>The caller retains ownership of <code>expression</code>. </p><dl class="section return"><dt>Returns</dt><dd>One of the values in <code>AddExpressionResult</code>. Does not return <code>AER_QueuedPartial</code>. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae9f32c0fa48f7b814a45c52f4b84fab1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int PlotExpressionGenerator::addExpressions </td>
+          <td>(</td>
+          <td class="paramtype">const QList&lt; const <a class="el" href="classPlotExpression.html">PlotExpression</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>expressions</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adds a set of expression to be generated even if already running. </p>
+<p>Thread-safe.</p>
+<p>The caller retains ownership of <code>expression</code>. </p><dl class="section return"><dt>Returns</dt><dd>One of the values in <code>AddExpressionResult</code>. </dd></dl>
 
 </div>
 </div>

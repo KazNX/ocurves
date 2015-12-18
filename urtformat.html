@@ -66,13 +66,13 @@ $(document).ready(function(){initNavTree('urtformat.html','');});
 <div class="contents">
 <div class="textblock"><p>The XML format for connecting Open <a class="el" href="classCurves.html" title="The data model for loaded plots and curves. ">Curves</a> to a real-time data source is described below. The root element is "connection" and contains either a "serial" or "network" child element.</p>
 <h1><a class="anchor" id="xmlconnection"></a>
-&lt;tt&gt;connection&lt;/tt&gt;</h1>
+connection</h1>
 <ul>
 <li><b>Children</b> - <code>serial, network</code></li>
 </ul>
 <p>The root document element.</p>
 <h1><a class="anchor" id="xmlserial"></a>
-&lt;tt&gt;serial&lt;/tt&gt;</h1>
+serial</h1>
 <ul>
 <li><b>Parent</b> - <code>connection</code> </li>
 <li><b>Children</b> - <code>buffer, time, comms</code></li>
@@ -87,7 +87,7 @@ $(document).ready(function(){initNavTree('urtformat.html','');});
 <td>baud </td><td>Specifies the serial baud rate. </td></tr>
 </table>
 <h1><a class="anchor" id="xmlnetwork"></a>
-&lt;tt&gt;network&lt;/tt&gt;</h1>
+network</h1>
 <ul>
 <li><b>Parent</b> - <code>connection</code> </li>
 <li><b>Children</b> - <code>buffer, time, comms</code></li>
@@ -104,7 +104,7 @@ $(document).ready(function(){initNavTree('urtformat.html','');});
 <td>protocol </td><td>Either "tcp" or "udp". </td></tr>
 </table>
 <h1><a class="anchor" id="xmlbuffer"></a>
-&lt;tt&gt;buffer&lt;/tt&gt;</h1>
+buffer</h1>
 <p><b>Optional:</b> Determines the size of the ring buffer Open <a class="el" href="classCurves.html" title="The data model for loaded plots and curves. ">Curves</a> uses to store data samples.</p>
 <table class="doxtable">
 <tr>
@@ -113,7 +113,7 @@ $(document).ready(function(){initNavTree('urtformat.html','');});
 <td>size </td><td>The number of data elements to store in the ring buffer. This number of elements is stored for each "column". Zero size results in the default size being used. </td></tr>
 </table>
 <h1><a class="anchor" id="xmltime"></a>
-&lt;tt&gt;time&lt;/tt&gt;</h1>
+time</h1>
 <p><b>Optional:</b> The <code>time</code> element can be used to identify the index of the timestamp column in the incoming data, and/or to adjust the timescale. The timestamp column is used to timestamp each incoming data value. The index is specified by the <code>column</code> attribute. The <code>scale</code> attribute is used to scale the read time stamps into seconds. The default is 1.</p>
 <table class="doxtable">
 <tr>
@@ -124,7 +124,7 @@ $(document).ready(function(){initNavTree('urtformat.html','');});
 <td>scale </td><td>Optional time scale multiplier used to convert the time column into seconds. The default is 1. </td></tr>
 </table>
 <h1><a class="anchor" id="xmlcomms"></a>
-&lt;tt&gt;comms&lt;/tt&gt;</h1>
+comms</h1>
 <ul>
 <li><b>Parent</b> - <code>serial</code> or <code>network</code> </li>
 <li><b>Children</b> - <code>onconnect, headings, receive, ondisconnect</code></li>
@@ -137,13 +137,13 @@ $(document).ready(function(){initNavTree('urtformat.html','');});
 <td>binary </td><td>Optional, "true" to use binary communications, "false" for text based communication. The default is "false". </td></tr>
 </table>
 <h1><a class="anchor" id="xmlconnect"></a>
-&lt;tt&gt;onconnect&lt;/tt&gt; and &lt;tt&gt;ondisconnect&lt;/tt&gt;</h1>
+onconnect and ondisconnect</h1>
 <ul>
 <li><b>Parent</b> - <code>comms</code> The <code>onconnect</code> element the message to send when a connection is established, while <code>ondisconnect</code> specifies the message to send just prior to disconnecting. These are intended to be used as handshaking messages, to request the start and end of data transmission. The content of these elements depends on the <code>binary</code> attribute of its parent. In binary mode, elements require a <code>struct</code> child element. In text mode, the element text is used for the message (the text between the start and end tag).</li>
 </ul>
 <p>In either communication mode both <code>onconenct</code> and <code>ondisconnect</code> elements are optional and may be omitted.</p>
 <h1><a class="anchor" id="xmlreceive"></a>
-&lt;tt&gt;headings&lt;/tt&gt; and &lt;tt&gt;receive&lt;/tt&gt;</h1>
+headings and receive</h1>
 <ul>
 <li><b>Parent</b> - <code>comms</code> </li>
 <li><code>Children</code> - <code>heading</code> for <code>headings</code>, or <code>struct</code> for <code>receive</code> <b>Optional:</b> The <code>headings</code> and <code>receive</code> elements specify details about the incoming data, but are mutually exclusive. Use <code>headings</code> when the <code>comms</code> mode is text based and <code>receive</code> in binary mode.</li>
@@ -152,7 +152,7 @@ $(document).ready(function(){initNavTree('urtformat.html','');});
 <p>When omitted, the number of text based samples per line is inferred from the first line, and headings are labelled "Column 1", "Column 2", ...</p>
 <p>The <code>receive</code> element defines a binary structure to read and has exactly one <code>struct</code> child.</p>
 <h1><a class="anchor" id="xmlstruct"></a>
-&lt;tt&gt;struct&lt;/tt&gt;</h1>
+struct</h1>
 <ul>
 <li><b>Parent</b> - <code>onconnect, receive, ondisconnect</code></li>
 <li><b>Children</b> - field The <code>struct</code> element identifies the binary structure of a message. It is used to define both incoming and outgoing messages, though some attributes of <code>field</code> elements change for each use case.</li>

@@ -18,6 +18,7 @@ var classPlotSource =
     [ "fullName", "classPlotSource.html#a3a3d87cff092329e8d45a14136a0f3ec", null ],
     [ "lengthenName", "classPlotSource.html#a4dca562ced554a0ce56419a87b78675f", null ],
     [ "name", "classPlotSource.html#a8781a751a2d063062a3f77e9d3db662b", null ],
+    [ "removeCurve", "classPlotSource.html#a5c198f4133cdb0d0ab05f2944df0b576", null ],
     [ "setFullName", "classPlotSource.html#adae83f36dbc8373cb8c015810bfa7013", null ],
     [ "setName", "classPlotSource.html#addd0c0615bce9d26d3570aa4346707e8", null ],
     [ "setTimeBase", "classPlotSource.html#ab7d6f09845629c6f33f4f9a8e43c1eea", null ],

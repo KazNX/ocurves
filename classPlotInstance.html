@@ -89,7 +89,8 @@ Public Types</h2></td></tr>
 <a class="el" href="classPlotInstance.html#ab1e594429dbb8773ac1774d5bd3eb6aba070b6626993c23ae80fb97f164c495bc">ExplicitColour</a> = (1 &lt;&lt; 2), 
 <a class="el" href="classPlotInstance.html#ab1e594429dbb8773ac1774d5bd3eb6aba8262a5660a5d296091f791672ead1af6">FilterNaN</a> = (1 &lt;&lt; 3), 
 <br />
-&#160;&#160;<a class="el" href="classPlotInstance.html#ab1e594429dbb8773ac1774d5bd3eb6abaf1be34665db86f3a4e0adde368c4b457">FilterInf</a> = (1 &lt;&lt; 4)
+&#160;&#160;<a class="el" href="classPlotInstance.html#ab1e594429dbb8773ac1774d5bd3eb6abaf1be34665db86f3a4e0adde368c4b457">FilterInf</a> = (1 &lt;&lt; 4), 
+<a class="el" href="classPlotInstance.html#ab1e594429dbb8773ac1774d5bd3eb6abac7063b3e50a19e6e780b804b53c5eddd">ExplicitTime</a> = (1 &lt;&lt; 5)
 <br />
  }<tr class="memdesc:ab1e594429dbb8773ac1774d5bd3eb6ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Status, control and display flags.  <a href="classPlotInstance.html#ab1e594429dbb8773ac1774d5bd3eb6ab">More...</a><br /></td></tr>
 <tr class="separator:ab1e594429dbb8773ac1774d5bd3eb6ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -204,6 +205,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a6e6649b5cb292fbfd1f4a72dfaa82d50"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlotInstance.html#a6e6649b5cb292fbfd1f4a72dfaa82d50">setFilterInf</a> (bool filter)</td></tr>
 <tr class="memdesc:a6e6649b5cb292fbfd1f4a72dfaa82d50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set or clear infinite value filtering.  <a href="#a6e6649b5cb292fbfd1f4a72dfaa82d50">More...</a><br /></td></tr>
 <tr class="separator:a6e6649b5cb292fbfd1f4a72dfaa82d50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a894039d2ef987c828a2fc4ea48e95308"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlotInstance.html#a894039d2ef987c828a2fc4ea48e95308">explicitTime</a> () const </td></tr>
+<tr class="memdesc:a894039d2ef987c828a2fc4ea48e95308"><td class="mdescLeft">&#160;</td><td class="mdescRight">Has the curve been generated with explicit time values?  <a href="#a894039d2ef987c828a2fc4ea48e95308">More...</a><br /></td></tr>
+<tr class="separator:a894039d2ef987c828a2fc4ea48e95308"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75bde6a14c81c64bd46e6cae4bf02448"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlotInstance.html#a75bde6a14c81c64bd46e6cae4bf02448">setExplicitTime</a> (bool explct)</td></tr>
+<tr class="memdesc:a75bde6a14c81c64bd46e6cae4bf02448"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the state of the <code>ExplicitTime</code> <code>Flag</code>.  <a href="#a75bde6a14c81c64bd46e6cae4bf02448">More...</a><br /></td></tr>
+<tr class="separator:a75bde6a14c81c64bd46e6cae4bf02448"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2872145167b81b40422760a6b0a646ed"><td class="memItemLeft" align="right" valign="top">QPointF&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlotInstance.html#a2872145167b81b40422760a6b0a646ed">sample</a> (size_t index) const </td></tr>
 <tr class="memdesc:a2872145167b81b40422760a6b0a646ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Samples the point at the given index.  <a href="#a2872145167b81b40422760a6b0a646ed">More...</a><br /></td></tr>
 <tr class="separator:a2872145167b81b40422760a6b0a646ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -275,6 +282,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </td></tr>
 <tr><td class="fieldname"><a class="anchor" id="ab1e594429dbb8773ac1774d5bd3eb6abaf1be34665db86f3a4e0adde368c4b457"></a>FilterInf&#160;</td><td class="fielddoc">
 <p>Set to filter infinite values, replacing them zero. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="ab1e594429dbb8773ac1774d5bd3eb6abac7063b3e50a19e6e780b804b53c5eddd"></a>ExplicitTime&#160;</td><td class="fielddoc">
+<p>Has the curve been generated with explicit time samples? Some generated curves have explicit times and are not subject to time scaling, time shift or time columns. </p>
+<p>Such curves may need to be renenerated if timing information is changed. </p>
 </td></tr>
 </table>
 
@@ -472,6 +483,34 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <dl class="section return"><dt>Returns</dt><dd>True if using an explicit colour. </dd></dl>
 
 <p>References <a class="el" href="classPlotInstance.html#ab1e594429dbb8773ac1774d5bd3eb6aba070b6626993c23ae80fb97f164c495bc">ExplicitColour</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a894039d2ef987c828a2fc4ea48e95308"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool PlotInstance::explicitTime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Has the curve been generated with explicit time values? </p>
+<dl class="section return"><dt>Returns</dt><dd>True if generated with explicit time values. </dd></dl>
+
+<p>References <a class="el" href="classPlotInstance.html#ab1e594429dbb8773ac1774d5bd3eb6abac7063b3e50a19e6e780b804b53c5eddd">ExplicitTime</a>.</p>
 
 </div>
 </div>
@@ -785,6 +824,40 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </dl>
 
 <p>References <a class="el" href="classPlotInstance.html#a56376433087d1aa88ac44050ad01b5f8">colour()</a>, and <a class="el" href="classPlotInstance.html#ab1e594429dbb8773ac1774d5bd3eb6aba070b6626993c23ae80fb97f164c495bc">ExplicitColour</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a75bde6a14c81c64bd46e6cae4bf02448"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PlotInstance::setExplicitTime </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>explct</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the state of the <code>ExplicitTime</code> <code>Flag</code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">explct</td><td>True to set <code>ExplicitTime</code>, false to clear. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>References <a class="el" href="classPlotInstance.html#ab1e594429dbb8773ac1774d5bd3eb6abac7063b3e50a19e6e780b804b53c5eddd">ExplicitTime</a>.</p>
 
 </div>
 </div>
