@@ -189,7 +189,7 @@ unsigned RealTimePlot::loadSpecs(double startTime)
 {
   QMutexLocker guard(_dataMutex);
 
-  if (!_connectionFiles.isEmpty())
+  if (_connectionFiles.isEmpty())
   {
     return 0;
   }

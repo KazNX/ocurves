@@ -72,11 +72,15 @@ int RealTimeTcpConnection::read(QByteArray &buffer)
     return -1;
   }
 
-  QByteArray newBytes = _socket->readAll();
-  if (newBytes.size())
+  if (_socket->bytesAvailable())
   {
-    buffer.append(newBytes);
-    return newBytes.size();
+    //_socket->waitForReadyRead(0);
+    QByteArray newBytes = _socket->readAll();
+    if (newBytes.size())
+    {
+      buffer.append(newBytes);
+      return newBytes.size();
+    }
   }
 
   return 0;
