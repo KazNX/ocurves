@@ -5,6 +5,9 @@
 //
 #include "plotinstance.h"
 
+#include <algorithm>
+#include <limits>
+
 PlotInstance::PlotInstance(const PlotSource::Ptr &source)
   : _source(source)
   , _expression(nullptr)
@@ -83,9 +86,22 @@ void PlotInstance::addPoint(const QPointF &p)
 
 void PlotInstance::addPoints(const QPointF *points, size_t pointCount)
 {
-  QMutexLocker guard(&_mutex);
-  _buffer.reserve(_buffer.size() + pointCount);
-  _buffer.insert(_buffer.end(), points, points + pointCount);
+  if (pointCount)
+  {
+    QMutexLocker guard(&_mutex);
+    size_t initial = _buffer.size();
+    const size_t newSize = initial + pointCount;
+    if (_buffer.capacity() < newSize)
+    {
+      _buffer.reserve(std::max<size_t>(1024u, _buffer.capacity() * 2u));
+    }
+
+    _buffer.resize(newSize);
+    for (size_t i = initial; i < newSize; ++i)
+    {
+      _buffer[i] = points[i];
+    }
+  }
 }
 
 

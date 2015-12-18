@@ -57,7 +57,12 @@ public:
     /// Set to filter NaN values, replacing them with zero.
     FilterNaN = (1 << 3),
     /// Set to filter infinite values, replacing them zero.
-    FilterInf = (1 << 4)
+    FilterInf = (1 << 4),
+    /// Has the curve been generated with explicit time samples?
+    /// Some generated curves have explicit times and are not subject to
+    /// time scaling, time shift or time columns. Such curves may need to be
+    /// renenerated if timing information is changed.
+    ExplicitTime = (1 << 5),
   };
 
   /// Some default values for plots.
@@ -200,6 +205,14 @@ public:
   /// Set or clear infinite value filtering.
   /// @param filter True to turn on filtering, false to turn off.
   inline void setFilterInf(bool filter) { setFlagsState(FilterInf, filter); }
+
+  /// Has the curve been generated with explicit time values?
+  /// @return True if generated with explicit time values.
+  inline bool explicitTime() const { return (_flags & ExplicitTime) != 0; }
+
+  /// Set the state of the @c ExplicitTime @c Flag.
+  /// @param explct True to set @c ExplicitTime, false to clear.
+  inline void setExplicitTime(bool explct) { setFlagsState(ExplicitTime, explct); }
 
   /// Samples the point at the given index. This caters for ring buffer sampling.
   ///

@@ -22,18 +22,15 @@ PlotExpressionGenerator::PlotExpressionGenerator(Curves *curves, const QList<Plo
   : PlotGenerator(curves)
   , _marker(new GenerationMarker( { true, 0 }))
 {
-  _sourceNames = sourceNames;
+  init(curves, expressions, sourceNames);
+}
 
-  for (const PlotExpression *exp : expressions)
-  {
-    _expressions.append({ exp->clone(), exp });
-  }
 
-  for (const PlotInstance *curve : curves->curves())
-  {
-    PlotInstance *c = new PlotInstance(*curve);
-    _existingCurves.push_back(c);
-  }
+PlotExpressionGenerator::PlotExpressionGenerator(Curves *curves, const QList<const PlotExpression *> &expressions, const QStringList &sourceNames)
+  : PlotGenerator(curves)
+  , _marker(new GenerationMarker( { true, 0 }))
+{
+  init(curves, expressions, sourceNames);
 }
 
 
@@ -53,15 +50,88 @@ PlotExpressionGenerator::~PlotExpressionGenerator()
 }
 
 
-bool PlotExpressionGenerator::addExpression(PlotExpression *expression)
+int PlotExpressionGenerator::addExpression(const PlotExpression *expression)
 {
   QMutexLocker lock(_dataMutex);
-  if (!_marker->complete)
+  if (_marker->complete)
   {
-    _expressions.append({ expression->clone(), expression });
-    return true;
+    return AER_AlreadyComplete;
+
+    // Ensure it's not already present.
+    bool exists = false;
+    int index = 0;
+    for (const ExpressionPair &expressionPair : _expressions)
+    {
+      if (expressionPair.original == expression)
+      {
+        if (index >= _marker->index)
+        {
+          // Already passed this item.
+          return AER_AlreadyComplete;
+        }
+        exists = true;
+      }
+      ++index;
+    }
+
+    if (!exists)
+    {
+      _expressions.append({ expression->clone(), expression });
+    }
   }
-  return false;
+  return AER_Queued;
+}
+
+
+int PlotExpressionGenerator::addExpressions(const QList<const PlotExpression *> &expressions)
+{
+  QMutexLocker lock(_dataMutex);
+  if (_marker->complete)
+  {
+    return AER_AlreadyComplete;
+  }
+
+  unsigned pendingCount = 0;
+  unsigned alreadyProcessedCount = 0;
+  for (const PlotExpression *expression : expressions)
+  {
+    // Ensure it's not already present.
+    bool exists = false;
+    int index = 0;
+    for (const ExpressionPair &expressionPair : _expressions)
+    {
+      if (expressionPair.original == expression)
+      {
+        if (index >= _marker->index)
+        {
+          // Already passed this item.
+          ++alreadyProcessedCount;
+        }
+        else
+        {
+          ++pendingCount;
+        }
+        exists = true;
+        break;
+      }
+    }
+
+    if (!exists)
+    {
+      _expressions.append({ expression->clone(), expression });
+      ++pendingCount;
+    }
+  }
+
+  if (alreadyProcessedCount)
+  {
+    if (!pendingCount)
+    {
+      return AER_AlreadyComplete;
+    }
+    return AER_QueuedPartial;
+  }
+  return AER_Queued;
 }
 
 
@@ -152,6 +222,8 @@ void PlotExpressionGenerator::run()
         c->setName(exp->toString());
         c->setExpression(originalExpression);
 
+        const bool explicitTime = exp->explicitTime();
+        c->setExplicitTime(explicitTime);
         // We may be generating a duplicate curve. This can occur when we load
         // a file, generate expression curves, then load another file and generate
         // new expression curves. We may rebind on the first set of curves.
@@ -244,3 +316,25 @@ bool PlotExpressionGenerator::curveExists(const PlotInstance &curve) const
 
   return false;
 }
+
+
+template <typename T>
+void PlotExpressionGenerator::init(Curves *curves, const QList<T *> &expressions, const QStringList &sourceNames)
+{
+  _sourceNames = sourceNames;
+
+  for (const PlotExpression *exp : expressions)
+  {
+    _expressions.append({ exp->clone(), exp });
+  }
+
+  for (const PlotInstance *curve : curves->curves())
+  {
+    PlotInstance *c = new PlotInstance(*curve);
+    _existingCurves.push_back(c);
+  }
+}
+
+// Instantiate init() function.
+template void PlotExpressionGenerator::init<PlotExpression>(Curves *curves, const QList<PlotExpression *> &expressions, const QStringList &sourceNames);
+template void PlotExpressionGenerator::init<const PlotExpression>(Curves *curves, const QList<const PlotExpression *> &expressions, const QStringList &sourceNames);

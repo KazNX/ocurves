@@ -102,6 +102,9 @@ unsigned Curves::removeUsingExpression(const PlotExpression *expression)
         QMutexLocker llock(_loadingMutex);
         _loadingCurves.removeOne(curve);
       }
+
+      curve->source().removeCurve(curve);
+
       // Don't check real-time curves. They don't support expressions.
       emit curveRemoved(curve);
 

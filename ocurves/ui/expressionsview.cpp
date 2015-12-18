@@ -69,6 +69,13 @@ void ExpressionsView::setExpressions(Expressions *expressions)
         functions.clear();
         if (_expressions->functionRegister().getDefinitionsInCategory(category, functions))
         {
+          // ensure the function list is sorted.
+          qSort(functions.begin(), functions.end(),
+                [](const FunctionDefinition * a, const FunctionDefinition * b)
+          {
+            return a->name() < b->name();
+          });
+
           QTableWidget *functionsTable = createFunctionsTable(functions, _ui->functionsTabs);
           _ui->functionsTabs->addTab(functionsTable, category);
         }
@@ -289,6 +296,7 @@ QTableWidget *ExpressionsView::createFunctionsTable(const QVector<const Function
     functionsTable->setColumnCount(2);
   }
   QTableWidgetItem *column = new QTableWidgetItem();
+
   functionsTable->setHorizontalHeaderItem(0, column);
   column->setText(tr("Function"));
   column = new QTableWidgetItem();

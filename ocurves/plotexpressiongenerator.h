@@ -62,15 +62,37 @@ public:
   ///   loaded.
   PlotExpressionGenerator(Curves *curves, const QList<PlotExpression *> &expressions, const QStringList &sourceNames);
 
+  /// @overload
+  PlotExpressionGenerator(Curves *curves, const QList<const PlotExpression *> &expressions, const QStringList &sourceNames);
+
   /// Destructor.
   ~PlotExpressionGenerator();
+
+  /// Return value sfor @c addExpression() and @c addExpressions().
+  enum AddExpressionResult
+  {
+    /// Returned when some of the new expressions are successfully queued, while others have
+    /// already been generated.
+    AER_QueuedPartial = -1,
+    /// Returned when all of the expression begin added have already been generated.
+    /// This occurs either because the generator thread has completed or because the
+    /// expressions already exist and have been processed (or are currently being processed).
+    AER_AlreadyComplete,
+    /// Returned when all the new expressions are successfully queued and will be generated.
+    AER_Queued
+  };
 
   /// Adds an expression to be generated even if already running. Thread-safe.
   ///
   /// The caller retains ownership of @p expression.
-  /// @return True if generation of @p expression has been queued for the current run.
-  ///   False if generation is not running or has completed.
-  bool addExpression(PlotExpression *expression);
+  /// @return One of the values in @c AddExpressionResult. Does not return @c AER_QueuedPartial.
+  int addExpression(const PlotExpression *expression);
+
+  /// Adds a set of expression to be generated even if already running. Thread-safe.
+  ///
+  /// The caller retains ownership of @p expression.
+  /// @return One of the values in @c AddExpressionResult.
+  int addExpressions(const QList<const PlotExpression *> &expressions);
 
   /// Aborts generation of @p expression if it has yet to be generated. Thread-safe.
   ///
@@ -92,11 +114,24 @@ protected:
   bool curveExists(const PlotInstance &curve) const;
 
 private:
+  /// Initialisation function called from the constructors to perform common initialisation.
+  /// @tparam T Either @c PlotExpression or <tt>const PlotExpression</tt>.
+  /// @param curves The @c Curves model containing existing curves from which to
+  ///   generate new ones. New curves are added to this model.
+  /// @param expressions The expressions to generate new curves from. These
+  ///   objects must remain valid until the generator completes.
+  /// @param sourceNames List of all the source files from which @p curves were
+  ///   loaded.
+  template <typename T>
+  void init(Curves *curves, const QList<T *> &expressions, const QStringList &sourceNames);
+
   /// Pairing of the original expression and the clone used for binding and generation (giving thread-safety).
   struct ExpressionPair
   {
     PlotExpression *expression;         ///< Used in expression evaluation.
     const PlotExpression *original;     ///< Original expression Reference. May get deleted during generation.
+
+    inline bool operator == (const PlotExpression *exp) { return original == exp; }
   };
 
   QVector<ExpressionPair> _expressions;   ///< Expressions used for evaluation.

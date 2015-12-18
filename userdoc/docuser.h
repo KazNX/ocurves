@@ -352,13 +352,13 @@ Expressions are not supported with real time data.
 The XML format for connecting Open Curves to a real-time data source is described below. The root
 element is "connection" and contains either a "serial" or "network" child element.
 
-# <tt>connection</tt> # {#xmlconnection}
+# connection # {#xmlconnection}
 - @b Children  - <tt>serial, network</tt>
 
 The root document element.
 
 
-# <tt>serial</tt> # {#xmlserial}
+# serial # {#xmlserial}
 - @b Parent - @c connection
 - @b Children  - <tt>buffer, time, comms</tt>
 
@@ -371,7 +371,7 @@ port      | Identifies the serial comm port to connect on ("COM3", "/dev/ttyUSB0
 baud      | Specifies the serial baud rate.
 
 
-# <tt>network</tt> # {#xmlnetwork}
+# network #  {#xmlnetwork}
 - @b Parent - @c connection
 - @b Children  - <tt>buffer, time, comms</tt>
 
@@ -385,7 +385,7 @@ port      | The target connection port.
 protocol  | Either "tcp" or "udp".
 
 
-# <tt>buffer</tt> # {#xmlbuffer}
+# buffer # {#xmlbuffer}
 @b Optional: Determines the size of the ring buffer Open Curves uses to store data samples.
 
 Attribute | Description
@@ -393,7 +393,7 @@ Attribute | Description
 size      | The number of data elements to store in the ring buffer. This number of elements is stored for each "column". Zero size results in the default size being used.
 
 
-# <tt>time</tt> # {#xmltime}
+# time # {#xmltime}
 @b Optional: The @c time element can be used to identify the index of the timestamp column in the
 incoming data, and/or to adjust the timescale. The timestamp column is used to timestamp each
 incoming data value. The index is specified by the @c column attribute. The @c scale attribute is
@@ -405,7 +405,7 @@ column    | Optional, one based index identifying the timestamp column index (de
 scale     | Optional time scale multiplier used to convert the time column into seconds. The default is 1.
 
 
-# <tt>comms</tt> # {#xmlcomms}
+# comms # {#xmlcomms}
 - @b Parent - @c serial or @c network
 - @b Children  - <tt>onconnect, headings, receive, ondisconnect</tt>
 
@@ -418,7 +418,7 @@ Attribute | Description
 binary    | Optional, "true" to use binary communications, "false" for text based communication. The default is "false".
 
 
-# <tt>onconnect</tt> and <tt>ondisconnect</tt> # {#xmlconnect}
+# onconnect and ondisconnect # {#xmlconnect}
 - @b Parent - @c comms
 The @c onconnect element the message to send when a connection is established, while
 @c ondisconnect specifies the message to send just prior to disconnecting. These are intended to
@@ -431,7 +431,7 @@ In either communication mode both @c onconenct and @c ondisconnect elements are 
 be omitted.
 
 
-# <tt>headings</tt> and <tt>receive</tt> # {#xmlreceive}
+# headings and receive # {#xmlreceive}
 - @b Parent - @c comms
 - @c Children - @c heading for @c headings, or @c struct for @c receive
 @b Optional: The @c headings and @c receive elements specify details about the incoming data, but are mutually
@@ -450,7 +450,7 @@ headings are labelled "Column 1", "Column 2", ...
 The @c receive element defines a binary structure to read and has exactly one @c struct child.
 
 
-# <tt>struct</tt> # {#xmlstruct}
+# struct # {#xmlstruct}
 - @b Parent - <tt>onconnect, receive, ondisconnect</tt>
 - @b Children - field
 The @c struct element identifies the binary structure of a message. It is used to define both
@@ -550,8 +550,30 @@ within the same data file. Expressions support the following syntax and features
 An expression plot will only be visible for files that contain columns matching all expression
 items.
 
-# Plot References # {#xplotreferences}
+# Expression Domain # {#xdomain}
+The domain of an expression is calculated as the union of the domain of expressions parts. In
+effect, the expression domain is solely derived from the domains of the curves referenced by and
+bound to the expression. This is because only curves have a well defined domain.
 
+The domain of a curve is determined by the time value of the minimum and maximum time samples for
+that curve; <tt>[tmin, tmax]</tt>. This normally corresponds to the time for the first and
+last samples in the curve. The time is either the zero based index of the sample - <tt>[0, N-1]</tt>
+where @c N is the number of samples - or the corresponding entry in the time column -
+<tt>[tmin, tmax]</tt> (see @ref utimescale).
+
+For example, consider the curve S={ 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 } and the time column
+T={ 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5 }. The domain of this curve, with time
+column enabled is [0.25, 2.5].
+
+By contrast, a constant has no fixed, independent domain, and can be evaluated for any time.
+
+Note that some expressions will define a strict time domain, while others may be modified by
+the time column, time base and time scale. @ref xslicing expressions in particular must define a strict
+time domain and must be recalculated if the time column, base or scale for the referenced curve
+changes.
+
+
+# Plot References # {#xplotreferences}
 Plot references are matched by name, with optional single or double quotes surrounding the plot
 name. Quotes are only required if the plot name contains spaces (see @ref uformats) or if the
 name includes quotes. Below are some examples:
@@ -568,6 +590,22 @@ examples:
 
 Literal or constant values support any valid numeric string. This includes negative numbers and
 scientific notation in the form '1.534e-3'.
+
+# Functions # {#xfunctions}
+Functions are special operations which may be used in an expression to perform special calculations.
+Functions accept a number of parameters and accept any valid expression to generate the arguments.
+Functions are evaluated for each value in the current time series.
+
+For example, the @c max(x) function returns the maximum value of @c x so far in the time series.
+Consider the curve <tt>S={ -1, 0, 2, 5, 4, 6, 3, 1, 0 }</tt>, then the expression <tt>max('S')</tt>
+yeilds <tt>{ -1, 0, 2, 5, 5, 6, 6, 6, 6 }</tt>.
+
+Some expressions, such as @c maxof(x...) accept a variable number of parameters and may be used to
+compare the results of other expressions. @c maxof returns the current maximum sample of any number
+of expressions. From the previous example, we use @c S and add a new set
+<tt>U={ 5, 4, 2, 0, -1, 8, 6, 2, 2 }</tt> and the expression <tt>maxof(S, U, 3)</tt>. The result is
+the maximum sample of @c S and @c U and the constant 3 at each sample time:
+<tt>{ 5, 4, 3, 5, 4, 8, 6, 3, 3 }</tt>.
 
 # Advanced Plot References # {#xadvancedreferences}
 Plot references also support the following advanced features:
@@ -593,9 +631,17 @@ Slicing syntax may be used to display a smaller portion of the original plot. Sl
 This draws the parts of 'plot_name' between the start and end times (inclusive). Specifying both
 start and end is optional allowing only a start or end to be specified. The other is assumed to be
 from first sample, or to the end sample respectively. Examples:
-- plot_name[40:100] : slice 'plot_name' from the 40th to the 100th sample.
+- plot_name[40:100] : slice 'plot_name' from time 40 up to an including time 100.
 - plot_name[100:] : slice 'plot_name' from sample time 100 to the end.
 - plot_name[:100] : slice 'plot_name' from the first sample to sample time 100.
+
+Note that the @c end slice value is included in the sampling domain. This differs from common
+slicing notation used in languages such as Python. This is because the slice values represent times
+rather than indexes.
+
+Also note that a slice expression must be regenerated if the referenced curve changes it's time
+domain. This occurs when the time column, time base or time scale are changed (consult
+@ref utimescale for more information).
 
 ## File specific references ## {#xfilereferences}
 A plot reference may specify matching only a specific plot file using the following syntax:
@@ -635,6 +681,30 @@ between all loaded files using the expression:
 
 @b Note: since regular expression matching is exhaustive, this will result in mirrored graphs,
 comparing file1 to file2 and file2 to file1.
+
+## Advanced Expression Domains ## {#xadvanceddomains}
+Advanced expressions may cause some issues with determining the expression domain. Normally, curves
+from the same file all have the same domain, thus the domain of any expression referencing multiple
+curves from the same file is the same as the domain of any expression referencing only one such
+curve. Advanced curve references may have a different domain. Slicing expressions narrow the domain
+of the original curve, while file specific references allow files with independent domains to be
+combined.
+
+This issue is resolved by setting the domain of any expression as the union of the domains of all
+parts of that expression. Consider the sequence <tt>S={ -1, 0, 2, 5, 4, 6, 3, 1, 0 }</tt> with
+time column <tt>T={ 1, 2, 3, 4, 5, 6, 7, 9, 10 }</tt> and the expression <tt>S[:5] - S[7:]</tt>.
+The domain of @c S is <tt>[1, 10]</tt>, but the domains of <tt>S[:5]</tt> and <tt>S[7:]</tt> are
+<tt>[1, 4]</tt> and <tt>[7, 10]</tt> respectively. Note that in practice this is a meaningless
+expression, however, the expression evaluation proceeds as follows:
+-# Calculate the expression domain as the union of the domains of <tt>S[:5]</tt> and <tt>S[7:]</tt>
+  - Expression domain = <tt>[1, 10]</tt>
+-# Walk the expression domain calculating samples for at each step
+
+The second step here results in both expressions <tt>S[:5]</tt> and <tt>S[7:]</tt> being sampled
+outside of their domains. This is resolved by simply returning a zero value for such out of range
+references.
+
+The resulting curve is: <tt>S[:5] - S[7:] = { -1, 0, 2, 5, 0, 0, -3, -1, 0 }</tt>.
 
 */
 

@@ -60,7 +60,10 @@ QPointF PlotInstanceSampler::sample(size_t i) const
 
     // Adjust the X value (time) for the sample. This looks up the shared source
     // and its timing information: time column, scaling and time shift.
-    sample.setX(lookupSampleTime(sample.x(), i));
+    if (!_curve->explicitTime())
+    {
+      sample.setX(lookupSampleTime(sample.x(), i));
+    }
 
     return sample;
   }

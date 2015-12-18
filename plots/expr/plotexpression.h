@@ -146,6 +146,16 @@ public:
   /// @return The string representation of the expression.
   inline QString toString() const { return stringExpression(); }
 
+  /// Is the curve generated with explicit time values?
+  ///
+  /// Some expressions, such as slicing, are dependent on explicit time values
+  /// and may require regeneration if the time scale, time base or time column
+  /// are changed. Such expressions should return true from this method. Tree
+  /// expressions should return true if any child expression returns true.
+  ///
+  /// @return True if the expression generates a curves with explicit time values.
+  virtual inline bool explicitTime() const { return false; }
+
 private:
   /// Internal implementation of the string conversion of @c PlotExpression.
   /// This is the implementation of @c toString().

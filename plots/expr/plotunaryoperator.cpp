@@ -13,7 +13,7 @@ PlotUnaryOperator::~PlotUnaryOperator()
 }
 
 
-BindResult PlotUnaryOperator::bind(const QList<PlotInstance*> &curves, PlotBindingTracker &bindTracker, PlotExpressionBindDomain &domain, bool repeatLastBinding)
+BindResult PlotUnaryOperator::bind(const QList<PlotInstance *> &curves, PlotBindingTracker &bindTracker, PlotExpressionBindDomain &domain, bool repeatLastBinding)
 {
   if (_operand)
   {
@@ -31,4 +31,15 @@ void PlotUnaryOperator::unbind()
   {
     _operand->unbind();
   }
+}
+
+
+bool PlotUnaryOperator::explicitTime() const
+{
+  if (_operand && _operand->explicitTime())
+  {
+    return true;
+  }
+
+  return false;
 }

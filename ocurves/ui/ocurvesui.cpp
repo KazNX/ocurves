@@ -148,6 +148,7 @@ OCurvesUI::OCurvesUI(QWidget *parent)
   connect(_curves, &Curves::curveAdded, this, &OCurvesUI::curveAdded);
   connect(_curves, &Curves::curveComplete, this, &OCurvesUI::curveComplete);
   connect(_curves, &Curves::loadingComplete, this, &OCurvesUI::curveLoadingComplete);
+  connect(_curves, &Curves::sourceDataChanged, this, &OCurvesUI::sourceDataChanged);
 
   _sourcesContextMenu = new QMenu();
   QAction *action;
@@ -632,6 +633,81 @@ void OCurvesUI::curveLoadingComplete()
 }
 
 
+void OCurvesUI::sourceDataChanged(const PlotSource *source)
+{
+  // Look for explicit time expressions in this source.
+  QList<const PlotExpression *> regenExpressions;
+  for (unsigned i = 0; i < source->curveCount(); ++i)
+  {
+    const PlotInstance *curve = source->curve(i);
+    if (curve && curve->explicitTime() && curve->expression())
+    {
+      regenExpressions << curve->expression();
+    }
+  }
+
+  // Remove all curves using the collated expressions.
+  for (const PlotExpression *exp : regenExpressions)
+  {
+    _curves->removeUsingExpression(exp);
+  }
+
+  if (!regenExpressions.empty())
+  {
+    bool createGenerator = false;
+    bool regenAll = false;
+    if (PlotExpressionGenerator *expressionGenerator = qobject_cast<PlotExpressionGenerator *>(_loader))
+    {
+      // Add to the current generator.
+      switch (expressionGenerator->addExpressions(regenExpressions))
+      {
+      case PlotExpressionGenerator::AER_QueuedPartial:
+        regenAll = true;  // Regenerate all expressions to be sure.
+      // No break.
+
+      case PlotExpressionGenerator::AER_AlreadyComplete:
+      default:
+        // Failed to queue all expressions or unknown state.
+        // Trigger restart of expression generation.
+        createGenerator = true;
+        break;
+
+      case PlotExpressionGenerator::AER_Queued:
+        createGenerator = false;
+        break;
+      }
+      createGenerator = !expressionGenerator->addExpressions(regenExpressions);
+    }
+    else if (_loader)
+    {
+      // Ensure we will regenerate expressions.
+      _postLoaderAction = PLA_GenerateExpressions;
+    }
+    else
+    {
+      createGenerator = true;
+    }
+
+    if (createGenerator)
+    {
+      // Need to create a new PlotExpressionGenerator and install it now.
+      QStringList sourceFiles;
+      _curves->enumerateFileSources(sourceFiles);
+      PlotGenerator *newLoader;
+      if (!regenAll)
+      {
+        newLoader = new PlotExpressionGenerator(_curves, regenExpressions, sourceFiles);
+      }
+      else
+      {
+        newLoader = new PlotExpressionGenerator(_curves, _expressions->expressions(), sourceFiles);
+      }
+      activateLoader(newLoader, PLA_CheckExpressions);
+    }
+  }
+}
+
+
 void OCurvesUI::loadComplete(int curveCount)
 {
   PlotGenerator *source = qobject_cast<PlotGenerator *>(sender());
@@ -798,6 +874,14 @@ void OCurvesUI::expressionAdded(PlotExpression *expression)
       // Will generate the new plot.
       return;
     }
+  }
+
+  if (_loader)
+  {
+    // Already have a loader which is not an expression generator. Let it complete and expressions
+    // will be generated afterwards.
+    _postLoaderAction = PLA_GenerateExpressions;
+    return;
   }
 
   // Failed to add to existing loader or there is no loader.

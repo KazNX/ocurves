@@ -54,6 +54,10 @@ public:
   /// Unbind left and right branches.
   virtual void unbind();
 
+  /// Is the generated expression sensitive to changes in the time domain?
+  /// @return True if any child returns true.
+  bool explicitTime() const override;
+
 private:
   PlotExpression *_left;  ///< Left branch.
   PlotExpression *_right; ///< Right branch.

@@ -137,6 +137,10 @@ public:
   /// @param curve The curve to add.
   void addCurve(PlotInstance *curve);
 
+  /// Remove a curve to this source. Internal use only.
+  /// @param curve The curve to remove.
+  void removeCurve(const PlotInstance *curve);
+
   /// Set the @c name() based on the current @c fullName().
   ///
   /// This treats @c fullName() as a file name, and extracts the

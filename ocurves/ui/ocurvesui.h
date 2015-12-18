@@ -28,6 +28,7 @@ class CurveProperties;
 class PlotExpression;
 class PlotGenerator;
 class PlotInstance;
+class PlotSource;
 class PlotViewToolbar;
 class LoadProgress;
 class RealTimePlot;
@@ -214,6 +215,11 @@ private slots:
 
   /// End marking curves as completed.
   void curveLoadingComplete();
+
+  /// A source has had its data changed. Trigger regeneration of expression curves
+  /// with explicit time values.
+  /// @param source The changed source.
+  void sourceDataChanged(const PlotSource *source);
 
   /// Loading complete from a @c PlotGenerator.
   ///

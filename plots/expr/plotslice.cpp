@@ -30,6 +30,13 @@ PlotSlice::~PlotSlice()
 
 double PlotSlice::sample(double sampleTime) const
 {
+  // Limit sampling to the bound domain.
+  if (!_sliceDomain.contains(sampleTime, true, false))
+  {
+    // Outside the domain.
+    return 0.0;
+  }
+
   // Index start/end members only define the range and don't affect sampling within that range.
   return _indexee->sample(sampleTime);
 }
@@ -97,8 +104,9 @@ BindResult PlotSlice::bind(const QList<PlotInstance *> &curves, PlotBindingTrack
     return BindError;
   }
 
-  info.sampleCount = 1u + std::max<size_t>(size_t((info.domainMax - info.domainMin) / info.sampleDelta), 1u);
-  info.sampleDelta = (info.domainMax - info.domainMin) / (info.sampleCount - 1u);
+  info.sampleCount = std::max<size_t>(size_t((info.domainMax - info.domainMin) / info.sampleDelta), 1u);
+  info.sampleDelta = (info.domainMax - info.domainMin) / (info.sampleCount);
+  _sliceDomain = info;
 
   return bindResult;
 }

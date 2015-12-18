@@ -110,9 +110,12 @@ void CurveProperties::timeColumnChanged()
   }
 
   const unsigned val = _ui->timeColumnEdit->text().toUInt();
-  _curve->source().setTimeColumn(val);
-  _ui->firstTimeEdit->setText(QString::number(_curve->source().firstTime()));
-  invalidateSource(_curve->source());
+  if (val != _curve->source().timeColumn())
+  {
+    _curve->source().setTimeColumn(val);
+    _ui->firstTimeEdit->setText(QString::number(_curve->source().firstTime()));
+    invalidateSource(_curve->source());
+  }
 }
 
 
@@ -124,8 +127,11 @@ void CurveProperties::timeScaleChanged()
   }
 
   const double val = _ui->timeScaleEdit->text().toDouble();
-  _curve->source().setTimeScale(val);
-  invalidateSource(_curve->source());
+  if (val != _curve->source().timeScale())
+  {
+    _curve->source().setTimeScale(val);
+    invalidateSource(_curve->source());
+  }
 }
 
 
@@ -137,8 +143,11 @@ void CurveProperties::timeBaseChanged()
   }
 
   const double val = _ui->timeBaseEdit->text().toDouble();
-  _curve->source().setTimeBase(val);
-  invalidateSource(_curve->source());
+  if (val != _curve->source().timeBase())
+  {
+    _curve->source().setTimeBase(val);
+    invalidateSource(_curve->source());
+  }
 }
 
 
@@ -294,12 +303,13 @@ void CurveProperties::update(PlotInstance *curve)
   }
 
   const bool enable = curve != nullptr;
+  const bool enableTime = curve && !curve->explicitTime();
   _ui->sourceNameEdit->setEnabled(enable);
   _ui->fullNameEdit->setEnabled(enable);
   _ui->curveNameEdit->setEnabled(enable);
-  _ui->timeColumnEdit->setEnabled(enable);
-  _ui->timeScaleEdit->setEnabled(enable);
-  _ui->timeBaseEdit->setEnabled(enable);
+  _ui->timeColumnEdit->setEnabled(enableTime);
+  _ui->timeScaleEdit->setEnabled(enableTime);
+  _ui->timeBaseEdit->setEnabled(enableTime);
   _ui->firstTimeEdit->setEnabled(enable);
   _ui->colourWidget->setEnabled(enable);
   _ui->restoreColourButton->setEnabled(enable);

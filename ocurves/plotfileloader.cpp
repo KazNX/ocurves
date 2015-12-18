@@ -254,6 +254,8 @@ size_t PlotFileLoader::loadFile(const QString &filePath, const QString &fileName
         c.addPoint(QPointF(time, value));
       }
 
+      first = false;
+
       ++pointIndex;
       if (pointIndex % ITEM_PROGESS_TICKS)
       {

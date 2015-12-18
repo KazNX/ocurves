@@ -111,6 +111,10 @@ public:
   /// @return A clone of the expression.
   PlotExpression *clone() const override;
 
+  /// Is the generated expression sensitive to changes in the time domain?
+  /// @return True
+  inline bool explicitTime() const override  { return true; }
+
 private:
   /// Internal implementation of the string conversion of @c PlotExpression.
   /// @return The string representation of the expression.
@@ -119,6 +123,9 @@ private:
   PlotExpression *_indexee;       ///< Expression to sample a slice of.
   PlotExpression *_indexerStart;  ///< Expression defining the slice start.
   PlotExpression *_indexerEnd;    ///< Expression defining the slice end.
+  /// The domain of the slice calculated in the last @c bind() call. Used to limit sampling to this
+  /// domain, even if the @c _indexee supports a greater domain.
+  PlotExpressionBindDomain _sliceDomain;
 };
 
 

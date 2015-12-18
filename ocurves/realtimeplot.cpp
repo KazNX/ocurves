@@ -261,6 +261,7 @@ void RealTimePlot::createPlots(RealTimePlotInfo &rtplot, unsigned count, const Q
   for (unsigned i = 0; i < count; ++i)
   {
     PlotInstance *plot = new PlotInstance(rtplot.source);
+    plot->setExplicitTime(true);
     rtplot.source->addCurve(plot);
     plot->setName((headings) ? (*headings)[i] : QString("Column %1").arg(i));
     plot->makeRingBuffer(rtplot.spec->bufferSize() ? rtplot.spec->bufferSize() : 2000000);

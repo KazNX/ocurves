@@ -59,18 +59,29 @@ struct PlotExpressionBindDomain
   inline PlotExpressionBindDomain() : domainMin(0), domainMax(0), sampleDelta(0), sampleCount(0), minSet(false), maxSet(false) {}
 
   /// Sets the domain to be unbounded.
-  inline void setUnbounded()
-  {
-    domainMin = domainMax = sampleDelta = 0;
-    sampleCount = 0u;
-    minSet = maxSet = false;
-  }
+  void setUnbounded();
 
   /// Returns true if the domain is unbounded.
   ///
   /// This only checks the @c sampleCount and may yield false positives.
   /// @return True if unbounded.
   inline bool isUnbounded() const { return sampleCount == 0u; }
+
+  /// Checks if @p sampleTime lies within the domain.
+  ///
+  /// Validation respects the @p minSet and @p maxSet values such that an unbounded curve
+  /// contains any @p sampleTime value. The test may be made open or closed
+  /// as determined by the @p closedMin and @p closedMax values. If @p closedMin is true
+  /// then <tt>sampleTime == domainMin</tt> is considered to be part of the domain, otherwise
+  /// it is not part of the domain. @p closedMax corresponds to @c sampleMax in the same way.
+  ///
+  /// The default behaviour is closed at both ends.
+  ///
+  /// @param sampleTime The time value to test within the domain.
+  /// @param closedMin Close the interval at the minimum value?
+  /// @param closedMax Close the interval at the maximum value?
+  /// @return True if @p sampleTime lies within the domain.
+  inline bool contains(double sampleTime, bool closedMin = true, bool closedMax = true) const;
 };
 
 /// @ingroup expr
@@ -100,6 +111,30 @@ void domainUnion(PlotExpressionBindDomain &result, const PlotExpressionBindDomai
 inline void domainUnion(PlotExpressionBindDomain &a, const PlotExpressionBindDomain &b)
 {
   return domainUnion(a, a, b);
+}
+
+
+inline void PlotExpressionBindDomain::setUnbounded()
+{
+  domainMin = domainMax = sampleDelta = 0;
+  sampleCount = 0u;
+  minSet = maxSet = false;
+}
+
+
+inline bool PlotExpressionBindDomain::contains(double sampleTime, bool closedMin, bool closedMax) const
+{
+  if (minSet && (closedMin && sampleTime < domainMin || !closedMin && sampleTime <= domainMin))
+  {
+    return false;
+  }
+
+  if (maxSet && (closedMax && sampleTime > domainMax || !closedMax  && sampleTime >= domainMax))
+  {
+    return false;
+  }
+
+  return true;
 }
 
 #endif // __PLOTEXPRESSIONBINDDOMAIN_H_

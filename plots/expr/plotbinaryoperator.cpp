@@ -47,3 +47,14 @@ void PlotBinaryOperator::unbind()
     _right->unbind();
   }
 }
+
+
+bool PlotBinaryOperator::explicitTime() const
+{
+  if (_left && _left->explicitTime() || _right && _right->explicitTime())
+  {
+    return true;
+  }
+
+  return false;
+}

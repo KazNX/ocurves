@@ -41,6 +41,10 @@ public:
   /// Unbind the operand.
   virtual void unbind();
 
+  /// Is the generated expression sensitive to changes in the time domain?
+  /// @return True if the child returns true.
+  bool explicitTime() const override;
+
 private:
   PlotExpression *_operand; ///< Operand expression.
 };

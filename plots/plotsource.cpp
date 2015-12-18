@@ -42,6 +42,13 @@ void PlotSource::addCurve(PlotInstance *curve)
 }
 
 
+void PlotSource::removeCurve(const PlotInstance *curve)
+{
+  QMutexLocker lock(_curvesMutex);
+  _curves.removeAll(const_cast<PlotInstance *>(curve));
+}
+
+
 double PlotSource::firstTime() const
 {
   if (const PlotInstance *curve = timeColumnCurve())
@@ -90,7 +97,7 @@ void PlotSource::deriveName()
 {
   QFileInfo fileRef(_fullName);
   fileRef = fileRef.fileName();
-  _name = fileRef.baseName();
+  _name = fileRef.completeBaseName();
 }
 
 
@@ -98,7 +105,7 @@ bool PlotSource::lengthenName()
 {
   QRegExp delim("[/\\]");
   int targetTokens = _name.split(delim).count() + 1;
-  QStringList tokens = QFileInfo(_fullName).baseName().split(delim);
+  QStringList tokens = QFileInfo(_fullName).completeBaseName().split(delim);
 
   if (targetTokens > tokens.size())
   {
