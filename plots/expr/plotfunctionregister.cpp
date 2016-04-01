@@ -315,7 +315,7 @@ void PlotFunctionRegister::registerDefaultFunctions()
   add(static_cast<double(*)(double)>(&std::acos), category, "acos", "Trigonometric arccos function of x");
   add(static_cast<double(*)(double)>(&std::asin), category, "asin", "Trigonometric arcsin function of x");
   add(static_cast<double(*)(double)>(&std::atan), category, "atan", "Trigonometric arctan function of x");
-  def = add(&atan2Func, category, "atan2", "Trigonometric artan of y/x with quandrant selection.");
+  def = add(&atan2Func, category, "atan2", "Trigonometric arctan of y/x with quadrant selection.", 2);
   if (def)
   {
     def->setDisplayName("atan2(y,x)");
