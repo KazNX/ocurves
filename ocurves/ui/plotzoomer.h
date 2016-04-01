@@ -1,5 +1,5 @@
 //
-// author
+// author Kazys Stepanas
 //
 // Copyright (c) CSIRO 2015
 //
@@ -9,6 +9,7 @@
 #include "ocurvesconfig.h"
 
 #include <qwt_plot_zoomer.h>
+#include <qwt_text.h>
 
 class QAction;
 class QMenu;
@@ -116,6 +117,12 @@ public:
   /// Override to set auto scaling when reaching zoom level zero.
   /// @param up The number of zoom steps to make.
   void zoom(int up) override;
+
+  /// Overridden to use %g in text display choosing between scientific and floating point notation
+  /// as required.
+  /// @param pos The cursor position.
+  /// @return Text display for the position.
+  QwtText trackerTextF(const QPointF &pos) const;
 
 public slots:
   /// Set the active @c ZoomMode.

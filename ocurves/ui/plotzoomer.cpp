@@ -187,6 +187,24 @@ void PlotZoomer::zoom(int up)
 }
 
 
+QwtText PlotZoomer::trackerTextF(const QPointF &pos) const
+{
+  QString text;
+  switch (rubberBand())
+  {
+  case HLineRubberBand:
+    text.sprintf("%.6g", pos.y());
+    break;
+  case VLineRubberBand:
+    text.sprintf("%.6g", pos.x());
+    break;
+  default:
+    text.sprintf("%.6g, %.6g", pos.x(), pos.y());
+  }
+  return QwtText(text);
+}
+
+
 void PlotZoomer::setZoomMode(ZoomMode mode)
 {
   if (_zoomMode != mode)
