@@ -26,8 +26,8 @@ const unsigned RTBinaryMessage::TypeSizes[] =
 };
 
 RTBinaryMessage::RTBinaryMessage(bool littleEndian)
-  : _littleEndian(littleEndian)
-  , _messageMinSize(0)
+  : _messageMinSize(0)
+  , _littleEndian(littleEndian)
 {
 }
 

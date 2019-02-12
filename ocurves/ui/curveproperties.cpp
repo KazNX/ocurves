@@ -227,7 +227,7 @@ void CurveProperties::symbolChanged(int index)
 }
 
 
-void CurveProperties::filterInfChecked(bool checked)
+void CurveProperties::filterInfChecked(bool)
 {
   if (_suppressEvents || !_curve)
   {
@@ -239,7 +239,7 @@ void CurveProperties::filterInfChecked(bool checked)
 }
 
 
-void CurveProperties::filterNaNChecked(bool checked)
+void CurveProperties::filterNaNChecked(bool)
 {
   if (_suppressEvents || !_curve)
   {

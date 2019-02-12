@@ -238,7 +238,7 @@ void ColoursView::cellDoubleClick(int row, int column)
 }
 
 
-void ColoursView::showEvent(QShowEvent *event)
+void ColoursView::showEvent(QShowEvent *)
 {
   // Refresh colour table.
   populateColourTable();

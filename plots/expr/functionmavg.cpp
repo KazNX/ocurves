@@ -15,7 +15,7 @@ FunctionMAvg::FunctionMAvg(const QString &category)
 }
 
 
-void FunctionMAvg::evaluate(PlotFunctionResult &result, double time, unsigned int argc, const double *argv, const PlotFunctionInfo &info, void *contextPtr) const
+void FunctionMAvg::evaluate(PlotFunctionResult &result, double time, unsigned int /*argc*/, const double *argv, const PlotFunctionInfo &/*info*/, void *contextPtr) const
 {
   Context &context = *static_cast<Context *>(contextPtr);
   result = addWindowAndAverage(time, argv[0], argv[1], context);
@@ -47,7 +47,7 @@ double FunctionMAvg::addWindowAndAverage(double time, double value, double windo
   }
 
   // Push new value. Handle NaN and infinite, replacing with zero.
-  value = (value == value && !isinf(value)) ? value : 0;
+  value = (value == value && !std::isinf(value)) ? value : 0;
   context.window.push_back(QPointF(time, value));
 
   context.total = 0;

@@ -54,7 +54,7 @@ void LoadProgress::overallProgress(int current, int total)
 }
 
 
-void LoadProgress::loadComplete(int overallCount)
+void LoadProgress::loadComplete(int /*overallCount*/)
 {
   hide();
   deleteLater();

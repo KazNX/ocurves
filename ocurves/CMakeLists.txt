@@ -1,146 +1,200 @@
-set(TARGET ocurves)
-# Use a capital for APPLE bundles.
-if(APPLE)
-  set(TARGET "OCurves")
-endif(APPLE)
+# Copyright (c) 2017
+# Commonwealth Scientific and Industrial Research Organisation (CSIRO)
+# ABN 41 687 119 230
+#
+# Author: Kazys Stepanas
 
-set(OCURVES_APP_NAME ${TARGET} CACHE INTERNAL "The main application name.")
-set(OCURVES_APP_NAME ${TARGET} PARENT_SCOPE)
+# Find external depedencies.
+# Generally, we should specify either CONFIG to use config style scripts, or MODULE for FindPackage scripts.
+find_package(Qt5 CONFIG REQUIRED
+  Concurrent
+  Gui
+  Network
+  OpenGL
+  PrintSupport
+  SerialPort
+  Svg
+  Widgets
+  Xml
+)
 
-if(WIN32)
-  set(QT_USE_QTMAIN TRUE)
-endif(WIN32)
-
-find_package(BISON QUIET)
-find_package(FLEX QUIET)
-
-if(BISON_FOUND AND FLEX_FOUND)
-  set(BISON_AND_FLEX YES)
-else(BISON_FOUND AND FLEX_FOUND)
-  set(BISON_AND_FLEX NO)
-endif(BISON_FOUND AND FLEX_FOUND)
-
-# Instruct CMake to run moc automatically when needed.
+# Setup automatic creation of Qt generated headers.
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
 
-# OpenGL, PrintSupport and SVG are not directly required for compiling, but required to run.
-find_package(Qt5Gui)
-find_package(Qt5Widgets)
-find_package(Qt5OpenGL)
-find_package(Qt5PrintSupport)
-find_package(Qt5Concurrent)
-find_package(Qt5Svg)
-find_package(Qt5Network)
-find_package(Qt5SerialPort)
-find_package(Qt5Xml)
+# Configure the project config header.
+configure_file(ocurvesconfig.h.in "${CMAKE_CURRENT_BINARY_DIR}/ocurvesconfig.h")
 
-# Set include directories.
-target_config_file(${TARGET} ocurvesconfig.h VAR CONFIG_HEADER)
-include_directories(. "${CMAKE_CURRENT_BINARY_DIR}")
+set(RESOURCES
+  icons/clear.png
+  icons/connect.png
+  icons/lock.png
+  icons/move.png
+  icons/multi-tool.png
+  icons/ocurves.icns
+  icons/ocurves.ico
+  icons/ocurves.png
+  icons/open2.png
+  icons/open.png
+  icons/reload2.png
+  icons/reload.png
+  icons/rubber-band.png
+  icons/unlock.png
+)
 
-include_directories(${Qt5Core_INCLUDE_DIRS}
-                    ${Qt5Widgets_INCLUDE_DIRS}
-                    ${Qt5Gui_INCLUDE_DIRS}
-                    ${Qt5OpenGL_INCLUDE_DIRS}
-                    ${Qt5Concurrent_INCLUDE_DIRS}
-                    ${Qt5PrintSupport_INCLUDE_DIRS}
-                    ${Qt5Svg_INCLUDE_DIRS}
-                    ${Qt5Network_INCLUDE_DIRS}
-                    ${Qt5SerialPort_INCLUDE_DIRS}
-                    ${Qt5Xml_INCLUDE_DIRS}
+set(SOURCES
+  model/bookmarks.cpp
+  model/bookmarks.h
+  model/curves.cpp
+  model/curves.h
+  model/expressions.cpp
+  model/expressions.h
+  rt/realtimecommspec.cpp
+  rt/realtimecommspec.h
+  rt/realtimeconnection.h
+  rt/realtimeserialconnection.cpp
+  rt/realtimeserialconnection.h
+  rt/realtimesourceloader.cpp
+  rt/realtimesourceloader.h
+  rt/realtimetcpconnection.cpp
+  rt/realtimetcpconnection.h
+  rt/realtimeudpconnection.cpp
+  rt/realtimeudpconnection.h
+  rt/rtbinarymessage.cpp
+  rt/rtbinarymessage.h
+  rt/rtmessage.cpp
+  rt/rtmessage.h
+  rt/rtstringmessage.cpp
+  rt/rtstringmessage.h
+  ui/coloursview.cpp
+  ui/coloursview.h
+  ui/coloursview.ui
+  ui/curveproperties.cpp
+  ui/curveproperties.h
+  ui/curveproperties.ui
+  ui/expressionsview.cpp
+  ui/expressionsview.h
+  ui/expressionsview.ui
+  ui/loadprogress.cpp
+  ui/loadprogress.h
+  ui/loadprogress.ui
+  ui/ocurvesui.cpp
+  ui/ocurvesui.h
+  ui/ocurvesui.ui
+  ui/plotdatacurve.cpp
+  ui/plotdatacurve.h
+  ui/plotpanner.cpp
+  ui/plotpanner.h
+  ui/plotview.cpp
+  ui/plotview.h
+  ui/plotviewtoolbar.cpp
+  ui/plotviewtoolbar.h
+  ui/plotview.ui
+  ui/plotzoomer.cpp
+  ui/plotzoomer.h
+  ui/splitplotview.cpp
+  ui/splitplotview.h
+  ui/toolbarwidgets.cpp
+  ui/toolbarwidgets.h
+  ui/toolbarwidgets.ui
+  defaultcolours.cpp
+  defaultcolours.h
+  main.cpp
+  ocurvesconfig.h.in
+  ocurves.qrc
+  ocurves.rc
+  ocurvesutil.cpp
+  ocurvesutil.h
+  ocurvesver.h
+  plotexpressiongenerator.cpp
+  plotexpressiongenerator.h
+  plotfile.cpp
+  plotfile.h
+  plotfileloader.cpp
+  plotfileloader.h
+  plotgenerator.cpp
+  plotgenerator.h
+  qwtrttiext.h
+  realtimeplot.cpp
+  realtimeplot.h
+  stringitems.h
+)
+
+set(DOC_HEADERS
+  doc/docbuild.h
+  doc/docdownloads.h
+  doc/docglossary.h
+  doc/docgroups.h
+  doc/doclicense.h
+  doc/docmain.h
+  doc/docstyle.h
+)
+
+# Build generated header list.
+set(GENERATED_FILES
+  "${CMAKE_CURRENT_BINARY_DIR}/ocurvesconfig.h"
+)
+
+# Generate the executable.
+add_executable(ocurves WIN32 ${SOURCES} ${DOC_HEADERS} ${RESOURCES})
+# CMake does not automatically propagate CMAKE_DEBUG_POSTFIX to executables. We do so to avoid confusing link issues
+# which can would when building release and debug exectuables to the same path.
+set_target_properties(ocurves PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
+
+# Setup solution display for the target.
+# Set the solution folder for the target (optional).
+set_target_properties(ocurves PROPERTIES FOLDER apps)
+
+# Setup target versioning.
+set_target_properties(ocurves PROPERTIES
+  VERSION ${OpenCurves_VERSION}
+  SOVERSION 1
+)
+
+# Add include directories to the target
+# For executables, all includes can be private (see set(SOURCES ...) above).
+target_include_directories(ocurves
+  PRIVATE
+    "${CMAKE_CURRENT_LIST_DIR}"
+    "${CMAKE_CURRENT_BINARY_DIR}"
   )
 
-# List source files. Add additional directories here. Defaults to find C++ source files.
-# Added to "SOURCES" variable.
-list_source_files(SOURCES DIRS . rt ui model)
-list_source_files(SOURCES DIRS . icons EXTS png)
-list_source_files(QRC_FILES DIRS . EXTS qrc)
-if(WIN32)
-  list_source_files(SOURCES DIRS . icons EXTS rc ico)
-endif(WIN32)
-list_source_files(UI_FILES DIRS ui EXTS ui)
-# Add documentation headers
-list_source_files(DOCHEADERS DIRS doc)
-qt5_wrap_ui(QT_SOURCES ${UI_FILES})
-qt5_add_resources(QT_RESOURCES ${QRC_FILES})
-list(APPEND SOURCES ${QT_SOURCES} ${QT_RESOURCES} ${DOCHEADERS})
+# Link dependencies.
+# Properly defined targets will also have their include directories and those of dependencies added by this command.
+target_link_libraries(ocurves
+  PUBLIC
+    plots
+    Qt5::Concurrent
+    Qt5::Gui
+    Qt5::Network
+    Qt5::OpenGL
+    Qt5::PrintSupport
+    Qt5::SerialPort
+    Qt5::Svg
+    Qt5::Widgets
+    Qt5::Xml
+)
 
-#--------------------------------------------------------------------------------
-# For Apple set the icns file containing icons
-if(APPLE)
-  # set how it shows up in the Info.plist file
-  set(MACOSX_BUNDLE_ICON_FILE ocurves.icns)
-  # set where in the bundle to put the icns file
-  set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/icons/ocurves.icns PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
-  # include the icns file in the target
-  list(APPEND SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/icons/ocurves.icns)
-endif(APPLE)
+# Setup installation.
+# Binary installation.
+install(TARGETS ocurves
+  LIBRARY DESTINATION lib COMPONENT Development
+  ARCHIVE DESTINATION lib COMPONENT Development
+  RUNTIME DESTINATION bin COMPONENT Runtime
+  INCLUDES DESTINATION include COMPONENT Development
+)
 
-# Ensure Visual Studio grouping matches that on disk.
-group_source_by_dir(${SOURCES} ${UI_FILES} ${QRC_FILES})
-group_qt_sources()
+# Install PDB files (MSVC)
+if(MSVC)
+  install(FILES $<TARGET_PDB_FILE:ocurves> DESTINATION bin OPTIONAL)
+endif(MSVC)
 
-set(PACKAGES ${QWT_PACKAGE} plots)
-
-if(ALLOCTRACK_ENABLE)
-  list(APPEND PACKAGES alloctrack)
-endif(ALLOCTRACK_ENABLE)
-
-if(WIN32)
-  set(TARGET_FLAGS WIN32)
-endif(WIN32)
-
-include_packages(${PACKAGES})
-add_executable(${TARGET} MACOSX_BUNDLE ${TARGET_FLAGS} ${SOURCES} ${UI_FILES})
-link_packages(${TARGET} ${PACKAGES})
-
-# Link Qt5 modules
-target_link_libraries(${TARGET} Qt5::Widgets Qt5::Gui Qt5::Network Qt5::SerialPort Qt5::Xml Qt5::OpenGL Qt5::Concurrent)
-
-list(APPEND CPACK_PACKAGE_EXECUTABLES "${TARGET};Open Curves")
-
-# Do not use per configuration suffix on MacOS. It messes up Bundles too much.
-if(NOT APPLE)
-  target_auto_suffix(${TARGET})
-endif(NOT APPLE)
-
-add_doxygen_directories(PATH ${SOURCES} ${DOCHEADERS}
-                        IMAGE_PATH "icons" "doc/images"
-                        EXAMPLE_PATH ".."
-                        PARENT_SCOPE)
-
-#-------------------------------------------------------------------------------
-# Installation
-#-------------------------------------------------------------------------------
-install(TARGETS ${TARGET}
-  BUNDLE DESTINATION . COMPONENT Runtime
-  RUNTIME DESTINATION . COMPONENT Runtime
-  #ARCHIVE DESTINATION lib COMPONENT Development
-  #LIBRARY DESTINATION lib COMPONENT Development
-  )
-
-#--------------------------------------------------------------------------------
-# Install needed Qt plugins by copying directories from the qt installation
-if(NOT DEFINED OCURVES_PLUGIN_TARGET_DIR)
-  set(OCURVES_PLUGIN_TARGET_DIR plugins)
-endif(NOT DEFINED OCURVES_PLUGIN_TARGET_DIR)
-
-set(QT_INSTALL_PLUGINS dir MinimalIntegration dir Jpeg)
-if(WIN32)
-  list(APPEND QT_INSTALL_PLUGINS WindowsPrinterSupport)
-endif(WIN32)
-install_qt5_plugins(${OCURVES_PLUGIN_TARGET_DIR} ${QT_INSTALL_PLUGINS})
-
-if(TARGET qwt)
-target_runtime_dir(QWT_LOC qwt)
-else(TARGET qwt)
-  get_filename_component(QWT_LOC "${QWT_LIBRARY}" DIRECTORY)
-endif(TARGET qwt)
-
-get_target_property(QMAKE_LOC Qt5::qmake LOCATION_Release)
-get_target_property(QTCORE_LOC Qt5::Core IMPORTED_LOCATION_RELEASE)
-get_filename_component(QT_BINARY_DIR "${QMAKE_LOC}" DIRECTORY)
-get_library_directory(QTCORE_LOC "${QTCORE_LOC}")
-install_setup_pack(${TARGET} QTCONF BUNDLE COMPONENT Runtime
-  FIXDIRS "${CMAKE_INSTALL_PREFIX}/${OCURVES_PLUGIN_TARGET_DIR}"
-  SEARCHDIRS "${QT_BINARY_DIR}" "${QWT_LOC}" "${QTCORE_LOC}")
+# Setup folder display with the target for Visual Studio.
+source_group("generated" FILES ${GENERATED_FILES})
+source_group("source" REGULAR_EXPRESSION ".*$")
+source_group("source\\doc" REGULAR_EXPRESSION "/doc/.*$")
+source_group("source\\icons" REGULAR_EXPRESSION "/icons/.*$")
+source_group("source\\model" REGULAR_EXPRESSION "/model/.*$")
+source_group("source\\rt" REGULAR_EXPRESSION "/rt/.*$")
+source_group("source\\ui" REGULAR_EXPRESSION "/ui/.*$")

@@ -17,8 +17,8 @@
 class PlotFunctionRegister;
 class QSettings;
 
-Q_DECLARE_METATYPE(PlotExpression *);
-Q_DECLARE_METATYPE(FunctionDefinition *);
+Q_DECLARE_METATYPE(PlotExpression *)
+Q_DECLARE_METATYPE(FunctionDefinition *)
 
 /// @ingroup data
 /// Maintains the current expressions available for generation and plotting.

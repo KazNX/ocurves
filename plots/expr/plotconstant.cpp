@@ -13,7 +13,7 @@ double PlotConstant::sample(double /*sampleTime*/) const
 }
 
 
-BindResult PlotConstant::bind(const QList<PlotInstance *> &curves, PlotBindingTracker &info, PlotExpressionBindDomain &domain, bool repeatLastBinding)
+BindResult PlotConstant::bind(const QList<PlotInstance *> &/*curves*/, PlotBindingTracker &/*info*/, PlotExpressionBindDomain &domain, bool /*repeatLastBinding*/)
 {
   domain.sampleCount = 1;
   return Bound;

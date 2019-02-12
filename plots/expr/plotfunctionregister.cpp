@@ -65,7 +65,7 @@ namespace
   }
 
 
-  void clipFunc(PlotFunctionResult &res, double /*time*/, unsigned int /*argc*/, const double *argv, const PlotFunctionInfo &prog)
+  void clipFunc(PlotFunctionResult &res, double /*time*/, unsigned int /*argc*/, const double *argv, const PlotFunctionInfo &/*prog*/)
   {
     // Bound to a range.
     const double &val = argv[0];
@@ -75,7 +75,7 @@ namespace
   }
 
 
-  void clipmaxFunc(PlotFunctionResult &res, double /*time*/, unsigned int /*argc*/, const double *argv, const PlotFunctionInfo &prog)
+  void clipmaxFunc(PlotFunctionResult &res, double /*time*/, unsigned int /*argc*/, const double *argv, const PlotFunctionInfo &/*prog*/)
   {
     // Bound to a maximum value.
     const double &val = argv[0];
@@ -84,7 +84,7 @@ namespace
   }
 
 
-  void clipminFunc(PlotFunctionResult &res, double /*time*/, unsigned int /*argc*/, const double *argv, const PlotFunctionInfo &prog)
+  void clipminFunc(PlotFunctionResult &res, double /*time*/, unsigned int /*argc*/, const double *argv, const PlotFunctionInfo &/*prog*/)
   {
     // Bound to a minimum value.
     const double &val = argv[0];
@@ -151,37 +151,37 @@ namespace
   }
 
 
-  void fmodFunc(PlotFunctionResult &res, double /*time*/, unsigned int /*argc*/, const double *argv, const PlotFunctionInfo &prog)
+  void fmodFunc(PlotFunctionResult &res, double /*time*/, unsigned int /*argc*/, const double *argv, const PlotFunctionInfo &/*prog*/)
   {
     res = std::fmod(argv[0], argv[1]);
   }
 
 
-  void remainderFunc(PlotFunctionResult &res, double /*time*/, unsigned int /*argc*/, const double *argv, const PlotFunctionInfo &prog)
+  void remainderFunc(PlotFunctionResult &res, double /*time*/, unsigned int /*argc*/, const double *argv, const PlotFunctionInfo &/*prog*/)
   {
     res = std::remainder(argv[0], argv[1]);
   }
 
 
-  void isNanFunc(PlotFunctionResult &res, double /*time*/, unsigned int /*argc*/, const double *argv, const PlotFunctionInfo &prog)
+  void isNanFunc(PlotFunctionResult &res, double /*time*/, unsigned int /*argc*/, const double *argv, const PlotFunctionInfo &/*prog*/)
   {
     res = std::isnan(argv[0]);
   }
 
 
-  void isInfFunc(PlotFunctionResult &res, double /*time*/, unsigned int /*argc*/, const double *argv, const PlotFunctionInfo &prog)
+  void isInfFunc(PlotFunctionResult &res, double /*time*/, unsigned int /*argc*/, const double *argv, const PlotFunctionInfo &/*prog*/)
   {
     res = std::isinf(argv[0]);
   }
 
 
-  void signFunc(PlotFunctionResult &res, double /*time*/, unsigned int /*argc*/, const double *argv, const PlotFunctionInfo &prog)
+  void signFunc(PlotFunctionResult &res, double /*time*/, unsigned int /*argc*/, const double *argv, const PlotFunctionInfo &/*prog*/)
   {
     res = std::signbit(argv[0]) ? -1.0 : 1.0;
   }
 
 
-  void piFunc(PlotFunctionResult &res, double /*time*/, unsigned int /*argc*/, const double *argv, const PlotFunctionInfo &prog)
+  void piFunc(PlotFunctionResult &res, double /*time*/, unsigned int /*argc*/, const double * /*argv*/, const PlotFunctionInfo &/*prog*/)
   {
     res = M_PI;
   }

@@ -20,7 +20,7 @@ FunctionUnwrap::FunctionUnwrap(const QString &category)
 }
 
 
-void FunctionUnwrap::evaluate(PlotFunctionResult &result, double time, unsigned int argc, const double *argv, const PlotFunctionInfo &info, void *context) const
+void FunctionUnwrap::evaluate(PlotFunctionResult &result, double /*time*/, unsigned int argc, const double *argv, const PlotFunctionInfo &info, void * /*context*/) const
 {
   const double rangeMin = argv[1];
   const double rangeMax = argv[2];

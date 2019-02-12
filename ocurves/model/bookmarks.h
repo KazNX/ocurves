@@ -95,6 +95,6 @@ namespace bookmarks
   /// Migrate bookmark settings from @c from to @c to.
   /// For import/export.
   void migrate(QSettings &to, QSettings &from, int bookmarkCount);
-};
+}
 
 #endif // BOOKMARKS_H_

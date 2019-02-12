@@ -39,7 +39,7 @@ void *FunctionDefinition::createContext() const
 }
 
 
-void FunctionDefinition::destroyContext(void *context) const
+void FunctionDefinition::destroyContext(void * /*context*/) const
 {
 
 }

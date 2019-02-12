@@ -235,7 +235,7 @@ void ExpressionsView::expressionRemoved(const PlotExpression *expression)
   for (int i = 0; i < _ui->expressionList->count(); ++i)
   {
     QListWidgetItem *item = _ui->expressionList->item(i);
-    void *ptr = item->data(Qt::UserRole).value<void *>();
+    //void *ptr = item->data(Qt::UserRole).value<void *>();
     PlotExpression *expr = static_cast<PlotExpression *>(item->data(Qt::UserRole).value<void *>());
     if (expr == expression)
     {
@@ -274,7 +274,7 @@ bool ExpressionsView::removeExpression(QListWidgetItem *item)
 {
   if (item)
   {
-    void *ptr = item->data(Qt::UserRole).value<void *>();
+    //void *ptr = item->data(Qt::UserRole).value<void *>();
     PlotExpression *expr = static_cast<PlotExpression *>(item->data(Qt::UserRole).value<void *>());
     _ui->expressionList->removeItemWidget(item);
     delete item;
