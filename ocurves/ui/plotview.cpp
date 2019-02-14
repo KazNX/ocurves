@@ -18,6 +18,7 @@
 
 #include "qwt_legend.h"
 #include "qwt_plot.h"
+#include "qwt_plot_grid.h"
 #include "qwt_plot_canvas.h"
 #include "qwt_plot_renderer.h"
 #include "qwt_symbol.h"
@@ -133,6 +134,14 @@ PlotView::PlotView(Curves *curves, QWidget *parent)
 
   _plot->setAxisAutoScale(PlotZoomer::AxisX);
   _plot->setAxisAutoScale(PlotZoomer::AxisY);
+  _plot->setCanvasBackground(QColor(255,255,255));
+  
+  _plotGrid = new QwtPlotGrid();
+  _plotGrid->enableXMin(true);
+  _plotGrid->enableYMin(true);
+  _plotGrid->setMajorPen(QPen(Qt::black, 0, Qt::DotLine));
+  _plotGrid->setMinorPen(QPen(Qt::gray, 0 , Qt::DotLine));
+  _plotGrid->attach(_plot);
 
   _zoom = new PlotZoomer(static_cast<QwtPlotCanvas *>(_plot->canvas()));
   _zoom->setTrackerMode(QwtPicker::AlwaysOn);
