@@ -22,6 +22,7 @@ class PlotZoomer;
 class QSettings;
 class QwtLegend;
 class QwtPlot;
+class QwtPlotGrid;
 
 namespace Ui
 {
@@ -287,6 +288,7 @@ private:
   void viewFocusLost();
 
   QwtPlot *_plot;       ///< The internal plot view.
+  QwtPlotGrid *_plotGrid; ///< The grid for the internal plot view
   Curves *_curves;      ///< Curves data model.
   PlotZoomer *_zoom;    ///< Zooming UI interface.
   PlotPanner *_panner;  ///< Panning UI interface.
