@@ -42,7 +42,7 @@ set(CMAKE_DEBUG_POSTFIX "d")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 
 # Build options
-option(OPENCURVES_BUILD_DOXYGEN "Build doxgen documentation?" OFF)
+option(OPENCURVES_BUILD_DOXYGEN "Build doxgen documentation? Does not affect user documentation build." OFF)
 
 option(ALLOCTRACK_ENABLE "Build and use Alloctrack leak tracking library?" NO)
 
@@ -60,7 +60,7 @@ include(cmake/compilerSetup.cmake)
 if(ALLOCTRACK_ENABLE)
   add_subdirectory(alloctrack)
 endif(ALLOCTRACK_ENABLE)
-# add_subdirectory(userdoc)
+add_subdirectory(userdoc)
 add_subdirectory(plots)
 add_subdirectory(ocurves)
 add_subdirectory(netgraph)
@@ -102,16 +102,18 @@ if(OPENCURVES_BUILD_DOXYGEN)
       PUBLISHER_ID au.csiro         # DOCSET_PUBLISHER_ID
       PROJECT_ID au.csiro.OpenCurves  # DOCSET_BUNDLE_ID, QHP_NAMESPACE, ECLIPSE_DOC_ID
       PATHS                         # INPUT (RECURSIVE is on)
-        alib
-        blib
-        doc
-      EXCLUDE_PATHS                 # EXCLUDE
-        alib/private
-        blib/private
+        ocurves
+        plots
+        userdoc
+      # EXCLUDE_PATHS                 # EXCLUDE
+      #   alib/private
       # Where to find source code examples.
-      # EXAMPLE_PATHS <paths>        # EXAMPLE_PATH
+      EXAMPLE_PATHS                # EXAMPLE_PATH
+        .
       # Where to find images.
-      # IMAGE_PATHS <paths>          # IMAGE_PATH
+      IMAGE_PATHS                   # IMAGE_PATH
+        ocurves/icons
+        userdoc/images
     )
 
     # Setup installation of the generated documentation: source, destination.

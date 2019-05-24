@@ -1562,30 +1562,44 @@ void OCurvesUI::viewHelp()
   QDir dir(qApp->applicationDirPath());
   QUrl helpUrl;
 
-  // Try as a sub-directory of the application path.
-  // Primarily a Windows based pattern.
-  if (QFile::exists(dir.filePath("userdoc/index.html")))
+  const char *patterns[] =
   {
-    helpUrl = QUrl::fromLocalFile(dir.filePath("userdoc/index.html"));
-  }
+    // Dev build pattern.
+    "userdoc/userdoc/index.html",
+    // Primarily a Windows based pattern.
+    "userdoc/index.html",
+    // Linux pattern.
+    "share/OpenCurves/userdoc/index.html",
+    // MacOS pattern.
+    "Resources/userdoc/index.html"
+  };
+  const size_t patternCount = sizeof(patterns) / sizeof(patterns[0]);
 
-  // Try up a directory. Primarily a Linux style installation (exectuable in a 'bin' directory).
-  // FIXME: needs to be resolved when the installation paths for LINUX are standardised.
-  if (helpUrl.isEmpty())
+  // Try all the patterns in
+  //  - the application dir
+  //  - the application dir up 1
+  //  - the application dir up 2 (dev)
+  QVector<QDir> dirs;
+  dirs << dir;
+  dir.cdUp();
+  dirs << dir;
+  dir.cdUp();
+  dirs << dir;
+
+  for (const QDir &dir : dirs)
   {
-    dir.cdUp();
-    if (QFile::exists(dir.filePath("userdoc/index.html")))
+    for (size_t i = 0; helpUrl.isEmpty() && i < patternCount; ++i)
     {
-      helpUrl = QUrl::fromLocalFile(dir.filePath("userdoc/index.html"));
+      // Primarily a Windows based pattern.
+      if (QFile::exists(dir.filePath(patterns[i])))
+      {
+        helpUrl = QUrl::fromLocalFile(dir.filePath(patterns[i]));
+      }
     }
-  }
 
-  // Try for a MacOS bundle installation pattern.
-  if (helpUrl.isEmpty())
-  {
-    if (QFile::exists(dir.filePath("Resources/userdoc/index.html")))
+    if (!helpUrl.isEmpty())
     {
-      helpUrl = QUrl::fromLocalFile(dir.filePath("Resources/userdoc/index.html"));
+      break;
     }
   }
 

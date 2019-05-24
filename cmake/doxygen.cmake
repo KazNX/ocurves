@@ -6,7 +6,22 @@
 
 include(CMakeParseArguments)
 
-find_package(DOXYGEN)
+find_package(Doxygen)
+
+# _doxygen_unpack_paths(var path1 [path2 ...])
+# Unpack a list of paths into a single string compatible with the doxygen file variable assignment.
+function(_doxygen_unpack_paths PATHS_STRING)
+  if(NOT ARGN)
+    set(${PATHS_STRING} "" PARENT_SCOPE)
+    return()
+  endif(NOT ARGN)
+  set(_PATHS)
+  foreach(_path ${ARGN})
+    get_filename_component(_path ${_path} ABSOLUTE)
+    set(_PATHS "${_PATHS} \\\n                         ${_path}")
+  endforeach(_path)
+  set(${PATHS_STRING} "${_PATHS}" PARENT_SCOPE)
+endfunction(_doxygen_unpack_paths)
 
 # doxygen_create(
 #   [DOXYFILE doxyfile.in]
@@ -49,7 +64,7 @@ find_package(DOXYGEN)
 function(doxygen_create)
   cmake_parse_arguments(DGEN
     ""
-    "PROJECT;VERSION;OUTPUT_DIR;CSS;PUBLISHER;PUBLISHER_ID;PROJECT_ID;DOXYFILE"
+    "PROJECT;TARGET;VERSION;OUTPUT_DIR;CSS;PUBLISHER;PUBLISHER_ID;PROJECT_ID;DOXYFILE"
     "EXAMPLE_PATHS;IMAGE_PATHS;EXCLUDE_PATHS;PATHS"
     ${ARGN})
 
@@ -60,15 +75,20 @@ function(doxygen_create)
   else(DGEN_PROJECT)
     set(DOXYGEN_PROJECT_NAME "${CMAKE_PROJECT_NAME}")
   endif(DGEN_PROJECT)
+  if(DGEN_TARGET)
+    set(TARGET_NAME ${DGEN_TARGET})
+  else(DGEN_TARGET)
+    set(TARGET_NAME ${DOXYGEN_PROJECT_NAME}-doc)
+  endif(DGEN_TARGET)
   # Project version
   set(DOXYGEN_PROJECT_VERSION ${DGEN_VERSION})
   # Paths to example sources used with the @example tag.
   if(DGEN_EXAMPLE_PATHS)
-    set(DOXYGEN_EXAMPLE_PATH "${DGEN_EXAMPLE_PATHS}")
+    _doxygen_unpack_paths(DOXYGEN_EXAMPLE_PATH ${DGEN_EXAMPLE_PATHS})
   endif(DGEN_EXAMPLE_PATHS)
   # Paths to images included with the @image tag.
   if(DGEN_IMAGE_PATHS)
-    set(DOXYGEN_IMAGE_PATH "${DGEN_IMAGE_PATHS}")
+    _doxygen_unpack_paths(DOXYGEN_IMAGE_PATH ${DGEN_IMAGE_PATHS})
   endif(DGEN_IMAGE_PATHS)
   # Output subdirectory for generated documentation.
   if(DGEN_OUTPUT_DIR)
@@ -93,28 +113,19 @@ function(doxygen_create)
   endif(DGEN_PROJECT_ID)
 
   # Input directories:
-  set(DOXYGEN_INPUT_DIRS)
-  foreach(dir ${DGEN_PATHS})
-    get_filename_component(dir ${dir} ABSOLUTE)
-    set(DOXYGEN_INPUT_DIRS "${DOXYGEN_INPUT_DIRS} \\\n                         ${dir}")
-  endforeach(dir)
+  _doxygen_unpack_paths(DOXYGEN_INPUT_DIRS ${DGEN_PATHS})
 
   # Exclude directories
-  set(DOXYGEN_EXCLUDE_DIRS)
-  foreach(dir ${DGEN_EXCLUDE_PATHS})
-    get_filename_component(dir ${dir} ABSOLUTE)
-    set(DOXYGEN_EXCLUDE_DIRS "${DOXYGEN_EXCLUDE_DIRS} \\\n                         ${dir}")
-  endforeach(dir)
+  _doxygen_unpack_paths(DOXYGEN_EXCLUDE_DIRS ${DGEN_EXCLUDE_PATHS})
 
   # Configure the doxyfile with the variables set above.
   if(NOT DGEN_DOXYFILE)
     set(DGEN_DOXYFILE "cmake/doxyfile.in")
   endif(NOT DGEN_DOXYFILE)
   configure_file("${DGEN_DOXYFILE}" "${CMAKE_CURRENT_BINARY_DIR}/doxyfile")
-  get_filename_component(DOXYFILE_PATH "cmake/doxyfile.in" ABSOLUTE)
 
   # Setup the Doxygen target.
-  add_custom_target(${DGEN_PROJECT}-doc
+  add_custom_target(${TARGET_NAME}
     "${DOXYGEN_EXECUTABLE}" "${CMAKE_CURRENT_BINARY_DIR}/doxyfile"
     DEPENDS
       "${DOXYFILE_PATH}"
