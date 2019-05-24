@@ -19,7 +19,7 @@ FunctionClean::FunctionClean(const QString &category)
 }
 
 
-void FunctionClean::evaluate(PlotFunctionResult &result, double time, unsigned int argc, const double *argv, const PlotFunctionInfo &info, void *contextPtr) const
+void FunctionClean::evaluate(PlotFunctionResult &result, double /*time*/, unsigned int argc, const double *argv, const PlotFunctionInfo &info, void * /*contextPtr*/) const
 {
   const bool zeroInf = (argc > 1) ? (argv[1] != 0) : false;
   const bool zeroNaN = (argc > 2) ? (argv[2] != 0) : false;

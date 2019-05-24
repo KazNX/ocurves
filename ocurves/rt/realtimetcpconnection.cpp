@@ -38,7 +38,6 @@ bool RealTimeTcpConnection::open(const QHostAddress &address, quint16 port, uint
 
 bool RealTimeTcpConnection::isConnected() const
 {
-  QAbstractSocket::SocketState state = _socket->state();
   return _socket && _socket->isOpen();
 }
 

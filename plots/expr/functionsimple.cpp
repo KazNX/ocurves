@@ -10,7 +10,7 @@
 FunctionSimple::FunctionSimple(const ValueFunction &func, const QString &category, const QString &name, const QString &description)
   : FunctionDefinition(category, name, description, 1, false)
 {
-  _function = [func](PlotFunctionResult & result, double time, unsigned int argc, const double * argv, const PlotFunctionInfo & info)
+  _function = [func](PlotFunctionResult & result, double /*time*/, unsigned int /*argc*/, const double * argv, const PlotFunctionInfo &/*info*/)
   {
     result = func(argv[0]);
   };

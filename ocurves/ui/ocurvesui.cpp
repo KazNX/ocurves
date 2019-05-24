@@ -64,10 +64,10 @@ OCurvesUI::OCurvesUI(QWidget *parent)
   , _splitView(nullptr)
   , _legend(nullptr)
   , _curves(new Curves(this))
-  , _suppressEvents(false)
   , _expressionsView(nullptr)
-  , _loader(nullptr)
+  , _suppressEvents(false)
   , _postLoaderAction(PLA_None)
+  , _loader(nullptr)
   , _sourcesContextMenu(nullptr)
   , _plotsContextMenu(nullptr)
   , _expressions(new Expressions)
@@ -612,7 +612,7 @@ void OCurvesUI::endNewCurves()
 }
 
 
-void OCurvesUI::curveComplete(PlotInstance *curve)
+void OCurvesUI::curveComplete(PlotInstance * /*curve*/)
 {
   replot();
 }
@@ -664,6 +664,7 @@ void OCurvesUI::sourceDataChanged(const PlotSource *source)
       case PlotExpressionGenerator::AER_QueuedPartial:
         regenAll = true;  // Regenerate all expressions to be sure.
       // No break.
+        // FALLTHROUGH
 
       case PlotExpressionGenerator::AER_AlreadyComplete:
       default:
@@ -761,7 +762,7 @@ void OCurvesUI::loadComplete(int curveCount)
 }
 
 
-void OCurvesUI::legendItemClicked(const QVariant &itemInfo, int index)
+void OCurvesUI::legendItemClicked(const QVariant &itemInfo, int /*index*/)
 {
   QwtLegend *legend = qobject_cast<QwtLegend *>(sender());
 
@@ -1330,7 +1331,7 @@ void OCurvesUI::viewAdded(PlotView *view)
 }
 
 
-void OCurvesUI::activeViewChanged(PlotView *newView, PlotView *oldView)
+void OCurvesUI::activeViewChanged(PlotView *newView, PlotView * /*oldView*/)
 {
   if (newView)
   {
@@ -1342,7 +1343,7 @@ void OCurvesUI::activeViewChanged(PlotView *newView, PlotView *oldView)
 }
 
 
-void OCurvesUI::viewLegendChanged(QwtLegend *legend, int position)
+void OCurvesUI::viewLegendChanged(QwtLegend *legend, int /*position*/)
 {
   if (legend)
   {
@@ -1607,7 +1608,7 @@ void OCurvesUI::showAbout()
   versionPart = QString("%1 %2").arg(tr("Version ")).arg(ocutil::versionString());
 
   // TODO:
-  infoPart;
+  //infoPart;
 
   QMessageBox::about(this, tr("About %1").arg(_originalWindowTitle),
                      QString("%1\n%2").arg(versionPart).arg(infoPart)

@@ -72,7 +72,7 @@ endif(${QWT}_VERSION VERSION_LESS ${QWT}_FIND_VERSION)
 
 if(${QWT}_DEBUG_LIBRARY)
   set(${QWT}_LIBRARIES general ${${QWT}_LIBRARY} debug ${${QWT}_DEBUG_LIBRARY})
-elseif(${QWT}_DEBUG_LIBRARY)
+elseif(${QWT}_LIBRARY)
   set(${QWT}_LIBRARIES ${${QWT}_LIBRARY})
 endif(${QWT}_DEBUG_LIBRARY)
 
@@ -163,9 +163,38 @@ mark_as_advanced(
   ${QWT}_PATCH_VERSION
 )
 
+add_library(qwt::qwt SHARED IMPORTED)
+set_target_properties(qwt::qwt PROPERTIES
+  INTERFACE_INCLUDE_DIRECTORIES "${${QWT}_INCLUDE_DIRS}"
+  INTERFACE_LINK_LIBRARIES "${${QWT}_LIBRARY}"
+  # INTERFACE_SYSTEM_INCLUDE_DIRECTORIES "/usr/include"
+)
+
+set_property(TARGET qwt::qwt APPEND PROPERTY IMPORTED_CONFIGURATIONS DEBUG)
+
+if(${QWT}_DEBUG_LIBRARY)
+  set_target_properties(qwt::qwt PROPERTIES
+    IMPORTED_LINK_INTERFACE_LANGUAGES_DEBUG "CXX"
+    IMPORTED_LOCATION_DEBUG "${${QWT}_DEBUG_LIBRARY}"
+    )
+else(${QWT}_DEBUG_LIBRARY)
+  set_target_properties(qwt::qwt PROPERTIES
+    IMPORTED_LINK_INTERFACE_LANGUAGES_DEBUG "CXX"
+    IMPORTED_LOCATION_DEBUG "${${QWT}_LIBRARY}"
+    )
+endif(${QWT}_DEBUG_LIBRARY)
+
+# TODO: Add the Qt5 dependencies for qwt:
+# Qt5::PrintSupport (optional)
+# Qt5::Svg (optional)
+# Qt5::OpenGL
+# Qt5::Widgets
+# Qt5::GUI
+
 # message(STATUS "################################################################################")
 # message(STATUS "${QWT}_INCLUDE_DIR ${${QWT}_INCLUDE_DIR}")
 # message(STATUS "${QWT}_INCLUDE_DIRS ${${QWT}_INCLUDE_DIRS}")
+# message(STATUS "${QWT}_DEBUG_LIBRARY ${${QWT}_DEBUG_LIBRARY}")
 # message(STATUS "${QWT}_LIBRARY ${${QWT}_LIBRARY}")
 # message(STATUS "${QWT}_LIBRARIES ${${QWT}_LIBRARIES}")
 # message(STATUS "${QWT}_RUNTIME_LIBRARIES ${${QWT}_RUNTIME_LIBRARIES}")

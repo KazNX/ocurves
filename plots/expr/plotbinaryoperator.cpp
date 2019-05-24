@@ -51,7 +51,7 @@ void PlotBinaryOperator::unbind()
 
 bool PlotBinaryOperator::explicitTime() const
 {
-  if (_left && _left->explicitTime() || _right && _right->explicitTime())
+  if ((_left && _left->explicitTime()) || (_right && _right->explicitTime()))
   {
     return true;
   }

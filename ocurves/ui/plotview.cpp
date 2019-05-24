@@ -18,6 +18,7 @@
 
 #include "qwt_legend.h"
 #include "qwt_plot.h"
+#include "qwt_plot_grid.h"
 #include "qwt_plot_canvas.h"
 #include "qwt_plot_renderer.h"
 #include "qwt_symbol.h"
@@ -51,9 +52,9 @@ public:
       PlotDataCurve *curveItem = static_cast<PlotDataCurve *>(plotItem);
       void *curve = &curveItem->curve();
       itemInfo = qVariantFromValue(curve);
-      int type = itemInfo.type();
-      type = qMetaTypeId<void *>();
-      type = itemInfo.userType();
+      // int type = itemInfo.type();
+      // type = qMetaTypeId<void *>();
+      // type = itemInfo.userType();
     }
     return itemInfo;
   }
@@ -98,6 +99,8 @@ protected:
         _owner->viewFocusLost();
       }
       break;
+    default:
+      break;
     }
     return QwtPlot::eventFilter(target, event);
   }
@@ -131,6 +134,14 @@ PlotView::PlotView(Curves *curves, QWidget *parent)
 
   _plot->setAxisAutoScale(PlotZoomer::AxisX);
   _plot->setAxisAutoScale(PlotZoomer::AxisY);
+  _plot->setCanvasBackground(QColor(255,255,255));
+  
+  _plotGrid = new QwtPlotGrid();
+  _plotGrid->enableXMin(true);
+  _plotGrid->enableYMin(true);
+  _plotGrid->setMajorPen(QPen(Qt::black, 0, Qt::DotLine));
+  _plotGrid->setMinorPen(QPen(Qt::gray, 0 , Qt::DotLine));
+  _plotGrid->attach(_plot);
 
   _zoom = new PlotZoomer(static_cast<QwtPlotCanvas *>(_plot->canvas()));
   _zoom->setTrackerMode(QwtPicker::AlwaysOn);
@@ -195,7 +206,6 @@ PlotView::PlotView(Curves *curves, QWidget *parent)
 
 PlotView::~PlotView()
 {
-  QObject *parent = this->parent();
   for (PlotDataCurve *display : _displayCurves)
   {
     display->hide();
@@ -452,8 +462,8 @@ void PlotView::curveDataChanged(const PlotInstance *curve)
       // Set display symbol if current setting differs from current display.
       if (QwtSymbol::NoSymbol < curve->symbol() && curve->symbol() <= QwtSymbol::Hexagon)
       {
-        if (colourChanged || !display->symbol() || display->symbol()->style() != curve->symbol() ||
-            display->symbol()->size().width() != curve->symbolSize())
+        if (colourChanged || !display->symbol() || int(display->symbol()->style()) != curve->symbol() ||
+            display->symbol()->size().width() != int(curve->symbolSize()))
         {
           QwtSymbol *symbol = new QwtSymbol(QwtSymbol::Style(curve->symbol()));
           QColor penColour = colour;

@@ -8,42 +8,56 @@ endif(WIN32)
 set(CMAKE_AUTOMOC ON)
 
 # OpenGL, PrintSupport and SVG are not directly required for compiling, but required to run.
-find_package(Qt5Core)
-find_package(Qt5Network)
+find_package(Qt5 CONFIG REQUIRED
+  Core
+  Network
+)
+
 # This need only be enabled if another version of Qt may exist on the system path.
 # For example, on OSX, Qt4 may be installed on the framework paths and included first
 # via the use of some other framework library. The following line ensures Qt5 as
 # found by find_qt5() is included first.
 
-# Set include directories.
-include_directories(. "${CMAKE_CURRENT_BINARY_DIR}")
-
-include_directories(${Qt5Core_INCLUDE_DIRS}
-                    ${Qt5Network_INCLUDE_DIRS}
-  )
-
 # List source files. Add additional directories here. Defaults to find C++ source files.
 # Added to "SOURCES" variable.
-list_source_files(SOURCES DIRS .)
-list(APPEND SOURCES ${QT_SOURCES})
+set(SOURCES
+  netgraph.cpp
+)
 
-# Ensure Visual Studio grouping matches that on disk.
-group_source_by_dir(${SOURCES} ${UI_FILES})
+add_executable(netgraph ${SOURCES} ${UI_FILES})
+target_include_directories(netgraph PRIVATE "${CMAKE_CURRENT_BINARY_DIR}" "${CMAKE_CURRENT_BINARY_DIR}")
+target_link_libraries(netgraph PRIVATE Qt5::Core Qt5::Network)
 
-include_packages(${PACKAGES})
-add_executable(${TARGET} ${TARGET_FLAGS} ${SOURCES} ${UI_FILES})
-link_packages(${TARGET} ${PACKAGES})
+# CMake does not automatically propagate CMAKE_DEBUG_POSTFIX to executables. We do so to avoid confusing link issues
+# which can would when building release and debug exectuables to the same path.
+set_target_properties(netgraph PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 
-# Link Qt5 modules
-qt5_use_modules(${TARGET} Core Network)
-target_auto_suffix(${TARGET})
+# Setup solution display for the target.
+# Set the solution folder for the target (optional).
+set_target_properties(netgraph PROPERTIES FOLDER utils)
 
-install(TARGETS ${TARGET}
-  DESTINATION "${OCURVES_BINARY_TARGET_DIR}" COMPONENT Runtime
-  #ARCHIVE DESTINATION lib COMPONENT Development
-  #LIBRARY DESTINATION lib COMPONENT Development
-  )
-install(FILES tcp.xml DESTINATION "${OCURVES_SUPPORT_TARGET_DIR}" COMPONENT Runtime)
-install(FILES tcpbin.xml DESTINATION "${OCURVES_SUPPORT_TARGET_DIR}" COMPONENT Runtime)
-install(FILES udp.xml DESTINATION "${OCURVES_SUPPORT_TARGET_DIR}" COMPONENT Runtime)
-install(FILES udpbin.xml DESTINATION "${OCURVES_SUPPORT_TARGET_DIR}" COMPONENT Runtime)
+# Setup target versioning.
+set_target_properties(netgraph PROPERTIES
+  VERSION ${OpenCurves_VERSION}
+  SOVERSION 1
+)
+
+# Setup installation.
+# Binary installation.
+install(TARGETS netgraph
+  DESTINATION bin COMPONENT Runtime
+)
+
+install(FILES tcp.xml DESTINATION bin COMPONENT Runtime)
+install(FILES tcpbin.xml DESTINATION bin COMPONENT Runtime)
+install(FILES udp.xml DESTINATION bin COMPONENT Runtime)
+install(FILES udpbin.xml DESTINATION bin COMPONENT Runtime)
+
+# Install PDB files (MSVC)
+if(MSVC)
+  install(FILES $<TARGET_PDB_FILE:netgraph> DESTINATION bin OPTIONAL)
+endif(MSVC)
+
+# Setup folder display with the target for Visual Studio.
+# source_group("generated" FILES ${GENERATED_FILES})
+source_group("source" REGULAR_EXPRESSION ".*$")

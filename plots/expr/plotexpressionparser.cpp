@@ -70,7 +70,6 @@ const PlotFunctionRegister &PlotExpressionParser::functionRegister() const
 
 PlotExpression *PlotExpressionParser::parse(const QString &expression, QStringList &errors)
 {
-  bool parsed = false;
   std::string stdExpr = qPrintable(expression);
 
   ParseState state;

@@ -124,12 +124,12 @@ inline void PlotExpressionBindDomain::setUnbounded()
 
 inline bool PlotExpressionBindDomain::contains(double sampleTime, bool closedMin, bool closedMax) const
 {
-  if (minSet && (closedMin && sampleTime < domainMin || !closedMin && sampleTime <= domainMin))
+  if (minSet && ((closedMin && sampleTime < domainMin) || (!closedMin && sampleTime <= domainMin)))
   {
     return false;
   }
 
-  if (maxSet && (closedMax && sampleTime > domainMax || !closedMax  && sampleTime >= domainMax))
+  if (maxSet && ((closedMax && sampleTime > domainMax) || (!closedMax  && sampleTime >= domainMax)))
   {
     return false;
   }

@@ -39,7 +39,7 @@ struct BindInfo
 /// This creates the following expression tree:
 /// @code{.unparsed}
 ///           PlotSubtract
-///             /   \
+///             /   \ .
 ///   PlotSample    PlotSample
 /// @endcode
 ///
