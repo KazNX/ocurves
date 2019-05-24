@@ -1529,8 +1529,8 @@ void OCurvesUI::importBookmarks()
       bool isSet = bookmarks::name(name, settings, bookmarkId);
       displayName = bookmarkMenuName(bookmarkId, name);
 
-      QAction *gotoAction = findGotoBookmarkAction(i);
-      QAction *clearAction = findClearBookmarkAction(i);
+      QAction *gotoAction = findGotoBookmarkAction(bookmarkId);
+      QAction *clearAction = findClearBookmarkAction(bookmarkId);
 
       if (gotoAction)
       {
