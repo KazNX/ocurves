@@ -6,6 +6,8 @@
 #include "plotexpression.h"
 #include "ocurvesparser.hpp"
 
+#include "plotparseprivate.h"
+
 #define YY_NO_UNISTD_H
 
 #ifdef __APPLE__

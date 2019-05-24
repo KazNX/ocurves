@@ -48,7 +48,7 @@ void deleteArgsList(ArgsList *argsList);
 %name-prefix="ocurves"
 
 /* variables. */
-%parse-param { ParseState *state }
+%parse-param { struct ParseState *state }
 
 %pure-parser
 

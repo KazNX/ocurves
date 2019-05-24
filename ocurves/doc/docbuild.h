@@ -59,8 +59,6 @@ Windows   | Visual Studio 2013 or above.
 MacOS     | Xcode 6 or higher. Apple Clang 7 or higher.
 Linux     | G++ 4.8 or higher, 4.9 or higher preferred.
 
-Linux builds have only received cursory testing to date.
-
 Build Process
 =============
 CMake is required to set up the build projects or make files. CMake is run in a command line shell
@@ -118,18 +116,22 @@ independently and does not reply on the "ocurves-marshal" project.
 #### Windows 64-bit ####
 64-bit Windows code can be built by modifying the CMake command line to read:
 
+@code
     cmake -G "Visual Studio 14 2015 Win64"
-
+@endcode
 or
-
+@code
     cmake -G "Visual Studio 12 2013 Win64"
+@endcode
 
 Note the addition of "Win64". This requires 64-bit Qt and Qwt binaries.
 
 ### Linux ###
-The relative installation paths have not been verified on Linux systems. That is to say, the
-installation pattern will be non-standard. It is advised that until this is resolved, a
-non-standard installation path be used, one which isolates Open Curves from system applications.
+The following apt packages should be installed to build Open Curves
+
+@code
+sudo apt install cmake qt5-default libqwt-qt5-dev libqt5serialport5-dev libqt5svg5-dev bison flex
+@endcode
 
 Advanced Options
 ----------------
